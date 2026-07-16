@@ -1,85 +1,614 @@
-<!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Academic homepage of Zhenyao Cui, a master's student at Huazhong University of Science and Technology working on EEG-based brain-computer interfaces.">
+  <meta name="author" content="Zhenyao Cui">
+  <meta name="theme-color" content="#163a5f">
 
-    <title>Zhenyao Cui</title>
-    <meta
-      name="description"
-      content="Academic homepage of Zhenyao Cui at Huazhong University of Science and Technology."
-    >
+  <title>Zhenyao Cui | HUST</title>
 
-    <style>
-      body {
-        max-width: 760px;
-        margin: 60px auto;
-        padding: 0 24px;
-        font-family: Arial, Helvetica, sans-serif;
-        line-height: 1.7;
-        color: #222;
+  <style>
+    :root {
+      --background: #f4f7fa;
+      --surface: #ffffff;
+      --surface-muted: #edf3f7;
+      --text: #17212b;
+      --text-muted: #5f6d79;
+      --accent: #176b87;
+      --accent-dark: #104e67;
+      --border: #dbe4ea;
+      --shadow: 0 18px 50px rgba(23, 50, 72, 0.09);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(23, 107, 135, 0.12), transparent 30rem),
+        var(--background);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+    }
+
+    .skip-link:focus {
+      left: 16px;
+      top: 16px;
+      z-index: 10;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .page {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--accent-dark);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 48px;
+      margin: 18px 0 72px;
+      padding: clamp(32px, 6vw, 68px);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ffffff 0%, #eef6f8 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .role {
+      margin: 20px 0 0;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
+
+    .lead {
+      max-width: 700px;
+      margin: 22px 0 0;
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+      line-height: 1.65;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 8px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      border-color: var(--accent-dark);
+      background: var(--accent-dark);
+      color: #ffffff;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .monogram {
+      display: grid;
+      width: clamp(120px, 18vw, 180px);
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1c7898, #123e63);
+      box-shadow: 0 20px 40px rgba(16, 78, 103, 0.2);
+      color: #ffffff;
+      font-family: Georgia, serif;
+      font-size: clamp(2.4rem, 7vw, 4.6rem);
+      letter-spacing: -0.08em;
+    }
+
+    main {
+      padding-bottom: 72px;
+    }
+
+    section {
+      scroll-margin-top: 24px;
+      margin-top: 72px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .interest-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+      margin: 24px 0 0;
+      list-style: none;
+    }
+
+    .interest-list li {
+      padding: 8px 13px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-muted);
+      color: var(--accent-dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .publication-list {
+      display: grid;
+      gap: 16px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .publication {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 22px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(23, 50, 72, 0.04);
+    }
+
+    .publication-year {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .publication h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.45;
+    }
+
+    .authors,
+    .venue {
+      margin: 8px 0 0;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .authors strong {
+      color: var(--text);
+    }
+
+    .pub-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .pub-links a {
+      font-size: 0.87rem;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-left: 7px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #dceef3;
+      color: var(--accent-dark);
+      font-size: 0.7rem;
+      font-weight: 800;
+      vertical-align: 2px;
+    }
+
+    .education-list {
+      display: grid;
+      gap: 16px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .education-item {
+      padding: 22px 24px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      background: var(--surface);
+    }
+
+    .education-item strong {
+      display: block;
+      font-size: 1.03rem;
+    }
+
+    .education-item span {
+      color: var(--text-muted);
+    }
+
+    .contact-card {
+      padding: clamp(26px, 5vw, 42px);
+      border-radius: var(--radius);
+      background: #163a5f;
+      color: #ffffff;
+    }
+
+    .contact-card h2 {
+      margin-bottom: 12px;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: #dce9f1;
+    }
+
+    .contact-card a {
+      color: #ffffff;
+      font-weight: 750;
+    }
+
+    footer {
+      padding: 28px 0 44px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.87rem;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 28px, 1080px);
       }
 
-      h1, h2 {
-        line-height: 1.3;
+      .topbar,
+      .hero {
+        align-items: flex-start;
       }
 
-      h1 {
-        margin-bottom: 8px;
+      .topbar {
+        flex-direction: column;
       }
 
-      h2 {
-        margin-top: 32px;
+      .hero {
+        grid-template-columns: 1fr;
       }
 
-      a {
-        color: #0969da;
+      .monogram {
+        grid-row: 1;
+        width: 104px;
       }
-    </style>
-  </head>
 
-  <body>
-    <header>
-      <h1>Zhenyao Cui</h1>
-      <p>
-        Master's Student in Intelligent Science and Technology<br>
-        Huazhong University of Science and Technology (HUST)
-      </p>
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .publication {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zhenyao Cui",
+    "jobTitle": "Master's Student",
+    "email": "mailto:zycui@hust.edu.cn",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "Huazhong University of Science and Technology"
+    },
+    "sameAs": [
+      "https://github.com/Czy-Trevor",
+      "https://dblp.org/pid/405/2772.html"
+    ],
+    "knowsAbout": [
+      "Brain-computer interfaces",
+      "Electroencephalography",
+      "EEG-based visual decoding"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#top">Zhenyao Cui</a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
 
-    <main>
-      <h2>About Me</h2>
-      <p>
-        I am currently pursuing a master's degree in Intelligent Science
-        and Technology at Huazhong University of Science and Technology
-        (HUST), supervised by Professor Dongrui Wu.
-      </p>
+    <section class="hero" id="top" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Academic Homepage</p>
+        <h1 id="page-title">Zhenyao Cui</h1>
+        <p class="role">
+          Master's Student · Huazhong University of Science and Technology
+        </p>
+        <p class="lead">
+          I study robust and efficient EEG decoding methods for practical
+          brain-computer interfaces, with a particular interest in
+          EEG-based visual decoding.
+        </p>
+        <div class="actions" role="group" aria-label="Profile links">
+          <a class="button primary" href="mailto:zycui@hust.edu.cn">Email</a>
+          <a class="button" href="https://github.com/Czy-Trevor">GitHub</a>
+          <a class="button" href="https://dblp.org/pid/405/2772.html">DBLP</a>
+        </div>
+      </div>
+      <div class="monogram" aria-hidden="true">ZC</div>
+    </section>
 
-      <h2>Research Interests</h2>
-      <ul>
-        <li>Brain-computer interfaces (BCIs)</li>
-        <li>Electroencephalography (EEG)</li>
-        <li>EEG-based visual decoding</li>
-      </ul>
+    <main id="main-content">
+      <section id="about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <h2 id="about-title">About</h2>
+          <div>
+            <p class="section-intro">
+              I am currently pursuing a master's degree in Intelligent Science
+              and Technology at Huazhong University of Science and Technology
+              (HUST), advised by Professor Dongrui Wu. My research focuses on
+              EEG-based brain-computer interfaces and neural signal decoding.
+            </p>
+            <ul class="interest-list" aria-label="Research interests">
+              <li>Brain-computer interfaces</li>
+              <li>EEG decoding</li>
+              <li>Visual decoding</li>
+              <li>Transfer learning</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-      <h2>Education</h2>
-      <ul>
-        <li>
-          Master's student in Artificial Intelligent,
-          Huazhong University of Science and Technology.
-        </li>
-        <li>
-          Bachelor's degree in Automation,
-          School of Artificial Intelligence and Automation,
-          Huazhong University of Science and Technology.
-        </li>
-      </ul>
+      <section id="publications" aria-labelledby="publications-title">
+        <div class="section-heading">
+          <h2 id="publications-title">Publications</h2>
+          <p class="section-intro">
+            Selected journal articles and preprints. My name is shown in bold.
+          </p>
+        </div>
 
-      <h2>Contact</h2>
-      <p>
-        Email:
-        <a href="mailto:zycui@hust.edu.cn">zycui@hust.edu.cn</a>
-      </p>
+        <ol class="publication-list">
+          <li class="publication">
+            <div class="publication-year">2026 · Journal</div>
+            <article>
+              <h3>
+                A Fuzzy Set Based Classification-to-Regression Extension
+                Framework for Transfer Learning and its Application to
+                Brain-Computer Interfaces
+                <span class="badge">First author</span>
+              </h3>
+              <p class="authors">
+                <strong>Zhenyao Cui</strong>, Siyang Li, Siyuan Kan, Yudi Wang,
+                Fei Luo, and Dongrui Wu
+              </p>
+              <p class="venue">
+                IEEE Transactions on Emerging Topics in Computational Intelligence,
+                Early Access, 2026.
+              </p>
+              <div class="pub-links">
+                <a href="https://doi.org/10.1109/TETCI.2026.3683713">DOI</a>
+                <a href="https://github.com/Czy-Trevor/C2RFuzzyFramework">Code</a>
+              </div>
+            </article>
+          </li>
+
+          <li class="publication">
+            <div class="publication-year">2026 · Preprint</div>
+            <article>
+              <h3>
+                Backpropagation-Free Test-Time Adaptation for Lightweight
+                EEG-Based Brain-Computer Interfaces
+                <span class="badge">Co-first author</span>
+              </h3>
+              <p class="authors">
+                Siyang Li, Jiayi Ouyang, <strong>Zhenyao Cui</strong>, Ziwei Wang,
+                Tianwang Jia, Feng Wan, and Dongrui Wu
+              </p>
+              <p class="venue">arXiv:2601.07556, 2026.</p>
+              <div class="pub-links">
+                <a href="https://arxiv.org/abs/2601.07556">arXiv</a>
+                <a href="https://arxiv.org/pdf/2601.07556">PDF</a>
+              </div>
+            </article>
+          </li>
+
+          <li class="publication">
+            <div class="publication-year">2026 · Journal</div>
+            <article>
+              <h3>
+                CMCRD: Cross-Modal Contrastive Representation Distillation
+                for Emotion Recognition
+              </h3>
+              <p class="authors">
+                Siyuan Kan, Huanyu Wu, <strong>Zhenyao Cui</strong>, Fan Huang,
+                Xiaolong Xu, and Dongrui Wu
+              </p>
+              <p class="venue">
+                IEEE Transactions on Affective Computing, 17(2), 1837–1846, 2026.
+              </p>
+              <div class="pub-links">
+                <a href="https://doi.org/10.1109/TAFFC.2026.3664341">DOI</a>
+                <a href="https://arxiv.org/abs/2504.09221">arXiv</a>
+              </div>
+            </article>
+          </li>
+
+          <li class="publication">
+            <div class="publication-year">2026 · Preprint</div>
+            <article>
+              <h3>EEG Foundation Models: Progresses, Benchmarking, and Open Problems</h3>
+              <p class="authors">
+                Dingkun Liu, Yuheng Chen, Zhu Chen, <strong>Zhenyao Cui</strong>,
+                Yaozhi Wen, Jiayu An, Jingwei Luo, and Dongrui Wu
+              </p>
+              <p class="venue">arXiv:2601.17883, 2026.</p>
+              <div class="pub-links">
+                <a href="https://arxiv.org/abs/2601.17883">arXiv</a>
+                <a href="https://arxiv.org/pdf/2601.17883">PDF</a>
+              </div>
+            </article>
+          </li>
+
+        </ol>
+      </section>
+
+      <section id="education" aria-labelledby="education-title">
+        <div class="section-heading">
+          <h2 id="education-title">Education</h2>
+          <ul class="education-list">
+            <li class="education-item">
+              <strong>Master's Student in Intelligent Science and Technology</strong>
+              <span>Huazhong University of Science and Technology</span>
+            </li>
+            <li class="education-item">
+              <strong>Bachelor's Degree in Automation</strong>
+              <span>
+                School of Artificial Intelligence and Automation,
+                Huazhong University of Science and Technology
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-card" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <p>
+          The best way to reach me is by email at
+          <a href="mailto:zycui@hust.edu.cn">zycui@hust.edu.cn</a>.
+        </p>
+      </section>
     </main>
-  </body>
-  </html>
+
+    <footer>
+      © 2026 Zhenyao Cui · Last updated July 2026
+    </footer>
+  </div>
+</body>
+</html>
