@@ -9,11 +9,13 @@
   <title>Zhenyao Cui</title>
   <style>
     :root {
-      --ink: #262626;
-      --muted: #60666d;
-      --blue: #185a9d;
-      --line: #e6e6e6;
-      --soft: #f6f7f8;
+      --ink: #353b3e;
+      --muted: #697176;
+      --link: #356b73;
+      --link-hover: #244d54;
+      --accent: #a25f47;
+      --accent-soft: #f4eee9;
+      --rule: #ebe8e4;
       --paper: #ffffff;
     }
 
@@ -23,114 +25,179 @@
       margin: 0;
       color: var(--ink);
       background: var(--paper);
-      font: 16px/1.62 Arial, Helvetica, sans-serif;
+      font: 15px/1.55 Georgia, "Times New Roman", serif;
     }
     img { max-width: 100%; }
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--link-hover); }
     .skip { position: absolute; left: -9999px; }
-    .skip:focus { left: 16px; top: 16px; z-index: 10; padding: 8px 12px; background: #fff; border: 1px solid var(--line); }
+    .skip:focus { left: 14px; top: 12px; z-index: 50; padding: 7px 11px; color: var(--ink); background: #fff; border: 1px solid var(--rule); }
+
+    .masthead {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, .96);
+      border-bottom: 1px solid var(--rule);
+    }
+    .masthead-inner {
+      width: min(1160px, calc(100% - 36px));
+      min-height: 54px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand { color: var(--ink); font-size: 1rem; font-weight: 700; text-decoration: none; }
+    .top-nav { display: flex; flex-wrap: wrap; gap: 20px; }
+    .top-nav a { color: var(--muted); font-size: .9rem; text-decoration: none; }
+    .top-nav a:hover { color: var(--ink); text-decoration: underline; }
 
     .page {
-      width: min(1120px, calc(100% - 44px));
+      width: min(1160px, calc(100% - 36px));
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 64px;
-      padding: 42px 0 64px;
+      grid-template-columns: 185px minmax(0, 1fr);
+      gap: 66px;
+      padding: 34px 0 62px;
     }
-    .sidebar { align-self: start; position: sticky; top: 32px; }
-    .portrait { display: block; width: 190px; height: 225px; object-fit: cover; object-position: center top; border: 1px solid #dcdcdc; }
-    h1 { margin: 20px 0 4px; font: 700 1.72rem/1.2 Georgia, "Times New Roman", serif; letter-spacing: -.02em; }
-    .role { margin: 0; color: var(--muted); font-size: .94rem; line-height: 1.5; }
-    .affiliation { margin: 12px 0 0; font-size: .93rem; line-height: 1.5; }
-    .profile-links { display: grid; gap: 4px; margin-top: 17px; font-size: .92rem; }
-    .profile-links a { width: fit-content; }
-    .nav { display: grid; gap: 5px; margin-top: 24px; padding-top: 17px; border-top: 1px solid var(--line); font-size: .88rem; }
+    .sidebar { align-self: start; position: sticky; top: 84px; }
+    .portrait {
+      display: block;
+      width: 175px;
+      height: 175px;
+      padding: 5px;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid #ddd8d2;
+      border-radius: 50%;
+      background: #fff;
+    }
+    h1 { margin: 15px 0 7px; font-size: 1.48rem; line-height: 1.2; }
+    .role, .location { margin: 0; color: var(--muted); font-size: .92rem; }
+    .location { margin-top: 12px; }
+    .profile-links { list-style: none; margin: 16px 0 0; padding: 14px 0 0; border-top: 1px solid var(--rule); }
+    .profile-links li { margin: 5px 0; font-size: .91rem; }
+    .profile-links a { color: var(--ink); text-decoration: none; }
+    .profile-links a:hover { color: var(--link); text-decoration: underline; }
 
     main { min-width: 0; }
-    section { scroll-margin-top: 24px; margin-bottom: 50px; }
-    h2 { margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #cfcfcf; font: 700 1.55rem/1.3 Georgia, "Times New Roman", serif; }
-    h3 { margin: 0; }
-    p { margin: 0 0 13px; }
-    .intro { font-size: 1.02rem; }
-    .research-focus { margin-top: 17px; color: #444; }
-    .research-focus strong { color: var(--ink); }
+    section { scroll-margin-top: 78px; margin-bottom: 38px; }
+    .section-title {
+      position: relative;
+      margin: 0 0 16px;
+      padding: 0 0 8px 15px;
+      border-bottom: 1px solid var(--rule);
+      font-size: 1.42rem;
+      line-height: 1.25;
+    }
+    .section-title::before { content: ""; position: absolute; left: 0; top: .15em; width: 5px; height: 1em; background: var(--accent); }
+    p { margin: 0 0 .7em; }
+    .bio { font-size: 1.01rem; }
+    .research-interests { margin-top: 13px; }
 
     .news { list-style: none; margin: 0; padding: 0; }
-    .news li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 17px; padding: 7px 0; }
-    .news time { color: var(--muted); font-size: .88rem; }
+    .news li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding: 5px 0; }
+    .news time { color: var(--accent); font-style: italic; white-space: nowrap; }
 
-    .group-title { margin: 26px 0 0; color: #4f555b; font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .group-title:first-of-type { margin-top: 0; }
+    .timeline { border-top: 1px solid var(--rule); }
+    .timeline-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 135px;
+      gap: 24px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .timeline-row h3 { margin: 0; font-size: 1rem; line-height: 1.4; }
+    .timeline-row p { margin: 3px 0 0; color: var(--muted); font-size: .92rem; }
+    .timeline-row time { color: var(--muted); font-size: .88rem; font-style: italic; text-align: right; }
+
+    .research-note { margin: -5px 0 22px; color: var(--muted); font-size: .9rem; }
+    .research-group { margin-top: 30px; }
+    .research-group-title { margin: 0; color: var(--ink); font-size: 1.08rem; line-height: 1.35; }
+    .research-group-copy { margin: 5px 0 0; color: var(--muted); font-size: .91rem; }
     .paper {
       display: grid;
-      grid-template-columns: 255px minmax(0, 1fr);
-      gap: 28px;
-      padding: 25px 0;
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--rule);
     }
     .paper-media {
-      min-height: 170px;
+      position: relative;
+      width: 300px;
+      height: 225px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #fff;
-      border: 1px solid #e2e2e2;
       overflow: hidden;
+      background: #fff;
+      border: 1px solid #e4e0dc;
+      box-shadow: 3px 3px 7px rgba(38, 45, 47, .16);
     }
-    .paper-media img { display: block; width: 100%; height: 170px; object-fit: contain; }
-    .paper-media img.tall { height: 190px; }
-    .paper-cover { min-height: 170px; padding: 22px; align-items: flex-start; justify-content: flex-end; flex-direction: column; background: var(--soft); }
-    .paper-cover strong { display: block; font: 700 2.05rem/1 Georgia, "Times New Roman", serif; letter-spacing: -.03em; }
-    .paper-cover span { display: block; margin-top: 10px; color: var(--muted); font-size: .74rem; line-height: 1.45; letter-spacing: .055em; text-transform: uppercase; }
-    .venue { margin: 0 0 5px; color: var(--blue); font-size: .81rem; font-weight: 700; }
-    .paper-title { font: 700 1.13rem/1.38 Georgia, "Times New Roman", serif; }
-    .authors, .paper-summary { margin: 7px 0 0; font-size: .91rem; }
-    .authors { color: var(--muted); line-height: 1.48; }
+    .paper-media img { display: block; width: 100%; height: 225px; object-fit: contain; }
+    .paper-media img.tall { height: 225px; }
+    .paper-badge {
+      position: absolute;
+      z-index: 2;
+      top: 10px;
+      left: -1px;
+      padding: 5px 14px;
+      color: #fff;
+      background: var(--accent);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+    .paper-cover { align-items: flex-start; justify-content: flex-end; padding: 24px; background: var(--accent-soft); }
+    .paper-cover strong { font-size: 2rem; line-height: 1; letter-spacing: -.025em; }
+    .paper-cover span:last-child { display: block; margin-top: 9px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: .71rem; letter-spacing: .055em; text-transform: uppercase; }
+    .paper-title { margin: 0; font-size: 1.08rem; line-height: 1.38; }
+    .authors, .paper-outlet, .paper-summary, .paper-links { margin: 7px 0 0; font-size: .92rem; line-height: 1.5; }
+    .authors { color: var(--muted); }
     .authors strong { color: var(--ink); }
-    .paper-summary { color: #3f4347; line-height: 1.56; }
-    .paper-links { margin-top: 9px; font-size: .86rem; }
-    .paper-links a { margin-right: 15px; }
-    .paper-links .pending { color: var(--muted); }
+    .paper-outlet { font-weight: 700; }
+    .paper-summary { color: #484e51; }
+    .paper-links a { margin-right: 14px; }
+    .pending { color: var(--muted); font-style: italic; }
 
-    .experience-list { border-top: 1px solid var(--line); }
-    .experience {
-      display: grid;
-      grid-template-columns: 150px minmax(0, 1fr);
-      gap: 22px;
-      padding: 17px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .experience time { color: var(--muted); font-size: .86rem; }
-    .experience h3 { font-size: .98rem; line-height: 1.45; }
-    .experience p { margin: 4px 0 0; color: #4f5459; font-size: .91rem; line-height: 1.55; }
+    .project-list { margin: 0; padding-left: 19px; }
+    .project-list li { margin: 8px 0; padding-left: 3px; }
+    .project-list strong { color: var(--ink); }
+    footer { margin-top: 52px; padding-top: 17px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .8rem; }
 
-    .award-list { margin: 0; padding-left: 19px; }
-    .award-list li { margin: 7px 0; }
-    footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
-
-    @media (max-width: 880px) {
-      .page { grid-template-columns: 1fr; gap: 42px; padding-top: 28px; }
+    @media (max-width: 940px) {
+      .page { grid-template-columns: 1fr; gap: 34px; }
       .sidebar { position: static; }
-      .sidebar-inner { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 25px; align-items: start; }
-      .portrait { width: 150px; height: 178px; }
+      .profile { display: grid; grid-template-columns: 145px minmax(0, 1fr); gap: 24px; align-items: center; }
+      .portrait { width: 145px; height: 145px; }
       h1 { margin-top: 0; }
-      .nav { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 17px; }
+      .profile-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
     }
-    @media (max-width: 650px) {
-      .page { width: min(100% - 28px, 1120px); }
-      .sidebar-inner { grid-template-columns: 105px minmax(0, 1fr); gap: 18px; }
-      .portrait { width: 105px; height: 128px; }
-      h1 { font-size: 1.48rem; }
-      .profile-links { grid-template-columns: repeat(2, max-content); column-gap: 16px; }
-      .nav { grid-column: 1 / -1; }
-      .paper { grid-template-columns: 1fr; gap: 17px; padding: 22px 0; }
-      .paper-media { min-height: 0; }
-      .paper-media img, .paper-media img.tall { height: auto; max-height: 265px; }
-      .paper-cover { min-height: 145px; }
-      .experience { grid-template-columns: 1fr; gap: 4px; }
-      .news li { grid-template-columns: 78px minmax(0, 1fr); gap: 10px; }
+    @media (max-width: 720px) {
+      .masthead-inner { align-items: flex-start; flex-direction: column; gap: 4px; padding: 9px 0; }
+      .top-nav { gap: 6px 15px; }
+      section { scroll-margin-top: 96px; }
+      .paper { grid-template-columns: 1fr; gap: 18px; align-items: start; }
+      .paper-text { order: 1; }
+      .paper-media { order: 2; width: min(300px, 100%); }
+    }
+    @media (max-width: 520px) {
+      .page, .masthead-inner { width: min(100% - 28px, 1160px); }
+      .profile { grid-template-columns: 105px minmax(0, 1fr); gap: 17px; }
+      .portrait { width: 105px; height: 105px; padding: 3px; }
+      h1 { font-size: 1.28rem; }
+      .role, .location { font-size: .84rem; }
+      .profile-links { grid-column: 1 / -1; margin-top: 3px; }
+      .top-nav a { font-size: .83rem; }
+      .timeline-row { grid-template-columns: 1fr; gap: 3px; }
+      .timeline-row time { text-align: left; }
+      .news li { grid-template-columns: 76px minmax(0, 1fr); gap: 9px; }
+      .paper-media { height: 205px; }
+      .paper-media img, .paper-media img.tall { height: 205px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
@@ -150,152 +217,188 @@
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="#about">Homepage</a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#education">Education</a>
+        <a href="#research">Research</a>
+        <a href="files/ZhenyaoCui_CV.pdf">CV</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="page">
-    <aside class="sidebar" aria-label="Profile and navigation">
-      <div class="sidebar-inner">
-        <img class="portrait" src="profile.jpg" width="190" height="225" alt="Portrait of Zhenyao Cui">
+    <aside class="sidebar" aria-label="Profile">
+      <div class="profile">
+        <img class="portrait" src="profile.jpg" width="175" height="175" alt="Portrait of Zhenyao Cui">
         <div>
           <h1>Zhenyao Cui</h1>
-          <p class="role">M.Eng. student<br>Fall 2027 PhD applicant</p>
-          <p class="affiliation">School of Artificial Intelligence and Automation<br>Huazhong University of Science and Technology</p>
-          <div class="profile-links">
-            <a href="mailto:zycui@hust.edu.cn">Email</a>
-            <a href="files/ZhenyaoCui_CV.pdf">CV</a>
-            <a href="https://github.com/Czy-Trevor">GitHub</a>
-            <a href="https://dblp.org/pid/405/2772.html">DBLP</a>
-          </div>
-          <nav class="nav" aria-label="Page sections">
-            <a href="#about">About</a>
-            <a href="#news">News</a>
-            <a href="#publications">Publications</a>
-            <a href="#experience">Experience</a>
-            <a href="#awards">Awards</a>
-          </nav>
+          <p class="role">M.Eng. Student at HUST<br>Fall 2027 PhD Applicant</p>
+          <p class="location">Wuhan, China</p>
+          <ul class="profile-links">
+            <li><a href="mailto:zycui@hust.edu.cn">Email</a></li>
+            <li><a href="files/ZhenyaoCui_CV.pdf">Curriculum Vitae</a></li>
+            <li><a href="https://github.com/Czy-Trevor">GitHub</a></li>
+            <li><a href="https://dblp.org/pid/405/2772.html">DBLP</a></li>
+          </ul>
         </div>
       </div>
     </aside>
 
     <main id="content">
       <section id="about">
-        <h2>About</h2>
-        <div class="intro">
-          <p>I am an M.Eng. student in Intelligent Science and Technology at HUST, advised by <a href="https://sites.google.com/site/drwuhust/home">Prof. Dongrui Wu</a>. I study how neural decoders can remain reliable when they meet a new person, task, or deployment condition.</p>
-          <p>My current work connects two problems: transferable EEG decoding for practical brain–computer interfaces, and cross-subject neural–visual representation learning for brain-to-image retrieval.</p>
+        <h2 class="section-title">Short Bio</h2>
+        <div class="bio">
+          <p>I am an M.Eng. student in Intelligent Science and Technology at Huazhong University of Science and Technology (HUST), advised by <a href="https://sites.google.com/site/drwuhust/home">Prof. Dongrui Wu</a>. I study how neural decoders can remain reliable when they meet a new person, task, or deployment condition.</p>
+          <p>My current work connects transferable EEG decoding for practical brain–computer interfaces with cross-subject neural–visual representation learning for brain-to-image retrieval.</p>
+          <p class="research-interests"><strong>Research Interests:</strong> transferable neural decoding, cross-subject learning, multimodal representation learning, and efficient adaptation.</p>
         </div>
-        <p class="research-focus"><strong>Research interests:</strong> transferable neural decoding, cross-subject learning, multimodal representation learning, and efficient adaptation.</p>
       </section>
 
       <section id="news">
-        <h2>News</h2>
+        <h2 class="section-title">News</h2>
         <ul class="news">
-          <li><time>Aug 2026</time><span>BFT was accepted for publication in <em>IEEE JBHI</em>.</span></li>
-          <li><time>Jun 2026</time><span>C2R appeared in <em>IEEE TETCI</em> Early Access.</span></li>
-          <li><time>Dec 2025</time><span>Our EEG-controlled robotic arm won the national championship at the China Brain-Computer Interface Competition.</span></li>
+          <li><time>2026.08</time><span>BFT was accepted for publication in <em>IEEE Journal of Biomedical and Health Informatics</em>.</span></li>
+          <li><time>2026.06</time><span>C2R appeared in <em>IEEE Transactions on Emerging Topics in Computational Intelligence</em> Early Access.</span></li>
+          <li><time>2025.12</time><span>Our EEG-controlled robotic arm won the national championship at the China Brain-Computer Interface Competition.</span></li>
           <li><time>2024</time><span>First Prize at the World Robot Contest Championship for ECoG-based limb-movement intention decoding.</span></li>
         </ul>
       </section>
 
-      <section id="publications">
-        <h2>Selected Publications</h2>
-
-        <p class="group-title">First-author work</p>
-
-        <article class="paper">
-          <div class="paper-media"><img src="images/papers/c2r.png" alt="C2R comparison of class-conditional alignment for classification and fuzzy class-conditional alignment for regression"></div>
-          <div>
-            <p class="venue">IEEE TETCI · 2026</p>
-            <h3 class="paper-title">A Fuzzy Set Based Classification-to-Regression Extension Framework for Transfer Learning and Its Application to Brain-Computer Interfaces</h3>
-            <p class="authors"><strong>Zhenyao Cui</strong>, Siyang Li, Siyuan Kan, Yudi Wang, Fei Luo, Dongrui Wu</p>
-            <p class="paper-summary">Most transfer-learning methods for BCI regression inherit tools designed for classification, where labels are discrete. C2R replaces hard classes with fuzzy classes over continuous targets, making conditional alignment usable for regression.</p>
-            <p class="paper-links"><a href="https://doi.org/10.1109/TETCI.2026.3683713">Paper</a><a href="https://github.com/Czy-Trevor/C2RFuzzyFramework">Code</a></p>
-          </div>
-        </article>
-
-        <article class="paper">
-          <div class="paper-media"><img src="images/papers/mcl-align.png" alt="MCL-Align illustration of marginal, conditional, and label shifts in cross-subject EEG regression"></div>
-          <div>
-            <p class="venue">IEEE TBME · Under review</p>
-            <h3 class="paper-title">MCL-Align: Marginal–Conditional–Label Alignment for Cross-Subject EEG Regression</h3>
-            <p class="authors"><strong>Zhenyao Cui</strong>, Jiahui Chai, Siyuan Kan, Yudi Wang, Dongrui Wu</p>
-            <p class="paper-summary">Cross-subject EEG regression shifts in three places at once: the signal distribution, the feature–label relationship, and each subject’s label scale. MCL-Align handles all three with marginal alignment, conditional-direction matching, and label standardization.</p>
-            <p class="paper-links"><span class="pending">Manuscript available on request</span></p>
-          </div>
-        </article>
-
-        <article class="paper">
-          <div class="paper-media paper-cover" aria-label="SCORE paper cover"><strong>SCORE</strong><span>Cross-subject EEG → image retrieval</span></div>
-          <div>
-            <p class="venue">Manuscript under review</p>
-            <h3 class="paper-title">SCORE: Subject Coordinate Recovery for Label-Free Cross-Subject EEG-to-Image Retrieval</h3>
-            <p class="authors"><strong>Zhenyao Cui</strong>, Siyuan Kan, Siyang Li, Ziwei Wang, Dongrui Wu</p>
-            <p class="paper-summary">EEG–image relations can be consistent across people while appearing in different subject-specific coordinates. SCORE recovers the coordinates of an unseen subject without target labels, source EEG at deployment, or encoder updates.</p>
-            <p class="paper-links"><span class="pending">Preprint coming soon</span></p>
-          </div>
-        </article>
-
-        <article class="paper">
-          <div class="paper-media paper-cover" aria-label="NEAR paper cover"><strong>NEAR</strong><span>Few-repetition neural retrieval</span></div>
-          <div>
-            <p class="venue">Manuscript under review</p>
-            <h3 class="paper-title">Beyond Trial Averaging: Anchoring Neural and Visual Representations for Few-Repetition Brain-to-Image Retrieval</h3>
-            <p class="authors"><strong>Zhenyao Cui</strong>, Siyuan Kan, Dingkun Liu, Dongrui Wu</p>
-            <p class="paper-summary">Few-repetition neural retrieval fails for more than noisy queries: the image gallery can also be misaligned. NEAR uses a stable high-repetition neural representation as a common anchor for both the neural query and the visual gallery.</p>
-            <p class="paper-links"><span class="pending">Preprint coming soon</span></p>
-          </div>
-        </article>
-
-        <p class="group-title">Collaborative work</p>
-
-        <article class="paper">
-          <div class="paper-media"><img class="tall" src="images/papers/bft.png" alt="Deployment challenges addressed by backpropagation-free test-time adaptation for EEG decoding"></div>
-          <div>
-            <p class="venue">IEEE JBHI · Accepted · Equal first author</p>
-            <h3 class="paper-title">Backpropagation-Free Test-Time Adaptation for Lightweight EEG-Based Brain-Computer Interfaces</h3>
-            <p class="authors">Siyang Li†, Jiayi Ouyang†, <strong>Zhenyao Cui†</strong>, Ziwei Wang, Tianwang Jia, Feng Wan, Dongrui Wu</p>
-            <p class="paper-summary">Test-time adaptation is attractive for streaming BCIs, but most methods update model weights and assume white-box access. BFT adapts each EEG trial using forward-only, reliability-weighted transformations for lightweight and quantized deployment.</p>
-            <p class="paper-links"><a href="https://arxiv.org/abs/2601.07556">arXiv</a><a href="https://arxiv.org/pdf/2601.07556">PDF</a></p>
-          </div>
-        </article>
-
-        <article class="paper">
-          <div class="paper-media"><img src="images/papers/eeg-fm-compass.png" alt="Overview of EEG foundation models trained on heterogeneous EEG signals and evaluated across BCI paradigms"></div>
-          <div>
-            <p class="venue">National Science Review · Accepted</p>
-            <h3 class="paper-title">EEG-FM-Compass: Progress, Benchmarking, and Future Directions for EEG Foundation Models</h3>
-            <p class="authors">Dingkun Liu, Yuheng Chen, Zhu Chen, <strong>Zhenyao Cui</strong>, Yaozhi Wen, Jiayu An, Jingwei Luo, Dongrui Wu</p>
-            <p class="paper-summary">A survey and controlled benchmark of EEG foundation models. The study organizes 55 models, evaluates 12 open-source models across 13 datasets, and examines whether scale and common adaptation protocols improve cross-subject generalization and few-shot calibration.</p>
-            <p class="paper-links"><a href="https://arxiv.org/abs/2601.17883">arXiv</a><a href="https://arxiv.org/pdf/2601.17883">PDF</a></p>
-          </div>
-        </article>
-
-        <article class="paper">
-          <div class="paper-media"><img class="tall" src="images/papers/cmcrd.png" alt="CMCRD teacher-student architecture for transferring eye-movement information to an EEG emotion classifier"></div>
-          <div>
-            <p class="venue">IEEE Transactions on Affective Computing · 2026</p>
-            <h3 class="paper-title">CMCRD: Cross-Modal Contrastive Representation Distillation for Emotion Recognition</h3>
-            <p class="authors">Siyuan Kan, Huanyu Wu, <strong>Zhenyao Cui</strong>, Fan Huang, Xiaolong Xu, Dongrui Wu</p>
-            <p class="paper-summary">CMCRD uses a stronger auxiliary modality during training while keeping inference unimodal. Contrastive representation distillation transfers complementary information between EEG and eye movements without requiring both sensors at test time.</p>
-            <p class="paper-links"><a href="https://doi.org/10.1109/TAFFC.2026.3664341">Paper</a><a href="https://arxiv.org/abs/2504.09221">arXiv</a></p>
-          </div>
-        </article>
-      </section>
-
-      <section id="experience">
-        <h2>Experience &amp; Projects</h2>
-        <div class="experience-list">
-          <article class="experience"><time>Jul 2026 – Present</time><div><h3>Research Intern · Alibaba Cloud Intelligence Group</h3><p>Working on domain-general cloud-log representation learning and an internal automated research workflow for controlled experimentation.</p></div></article>
-          <article class="experience"><time>Jun 2025 – Jun 2026</time><div><h3>Project Lead · Dongfeng Motor Group</h3><p>Led a multimodal intelligent-cockpit evaluation project from protocol and corpus design to EEG, speech, and facial-cue modeling and delivery.</p></div></article>
-          <article class="experience"><time>Sep – Dec 2025</time><div><h3>Fast and Accurate EEG-Controlled Robotic Arm</h3><p>Designed the EEG paradigm, decoder, and closed-loop control system for reliable, low-latency competition deployment.</p></div></article>
-          <article class="experience"><time>2024</time><div><h3>ECoG-Based Limb-Movement Intention Decoding</h3><p>Developed a decoder for continuous limb-movement intentions in the minimally invasive BCI track of the World Robot Contest Championship.</p></div></article>
+      <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+          <article class="timeline-row">
+            <div><h3>Huazhong University of Science and Technology</h3><p>M.Eng. in Intelligent Science and Technology · GPA 3.89/4.00, rank 5/65 · Advisor: Prof. Dongrui Wu</p></div>
+            <time>2024.09 – 2027.06</time>
+          </article>
+          <article class="timeline-row">
+            <div><h3>Huazhong University of Science and Technology</h3><p>B.Eng. in Automation, Elite Engineer Program · GPA 3.91/4.00, rank 3/28 · Outstanding Graduate of HUST</p></div>
+            <time>2020.09 – 2024.06</time>
+          </article>
         </div>
       </section>
 
-      <section id="awards">
-        <h2>Selected Awards</h2>
-        <ul class="award-list">
-          <li>National Champion, China Brain-Computer Interface Competition, 2025.</li>
-          <li>First Prize, ECoG-Based Limb-Movement Intention Decoding, World Robot Contest Championship, 2024.</li>
-          <li>Outstanding Graduate of HUST, 2024.</li>
+      <section id="industry">
+        <h2 class="section-title">Industrial Experience</h2>
+        <div class="timeline">
+          <article class="timeline-row">
+            <div><h3>Alibaba Cloud Intelligence Group · Research Intern</h3><p>Working on domain-general cloud-log representation learning and an internal automated research workflow for controlled experimentation.</p></div>
+            <time>2026.07 – Present</time>
+          </article>
+          <article class="timeline-row">
+            <div><h3>Dongfeng Motor Group · Project Lead</h3><p>Led a multimodal intelligent-cockpit evaluation project from protocol and corpus design to EEG, speech, and facial-cue modeling and delivery.</p></div>
+            <time>2025.06 – 2026.06</time>
+          </article>
+        </div>
+      </section>
+
+      <section id="research">
+        <h2 class="section-title">Research Work</h2>
+        <p class="research-note">† denotes equal contribution. Public links are provided where available.</p>
+
+        <div class="research-group">
+          <h3 class="research-group-title">Transferable EEG Decoding</h3>
+          <p class="research-group-copy">Learning reliable neural decoders across users, continuous targets, and deployment conditions.</p>
+
+          <article class="paper">
+            <div class="paper-media"><span class="paper-badge">TETCI 2026</span><img src="images/papers/c2r.png" alt="C2R comparison of class-conditional alignment for classification and fuzzy class-conditional alignment for regression"></div>
+            <div class="paper-text">
+              <h4 class="paper-title">A Fuzzy Set Based Classification-to-Regression Extension Framework for Transfer Learning and Its Application to Brain-Computer Interfaces</h4>
+              <p class="authors"><strong>Zhenyao Cui</strong>, Siyang Li, Siyuan Kan, Yudi Wang, Fei Luo, Dongrui Wu</p>
+              <p class="paper-outlet">IEEE Transactions on Emerging Topics in Computational Intelligence, 2026</p>
+              <p class="paper-summary"><strong>Short Summary:</strong> Most transfer-learning methods for BCI regression inherit tools designed for classification, where labels are discrete. C2R replaces hard classes with fuzzy classes over continuous targets, making conditional alignment usable for regression.</p>
+              <p class="paper-links"><a href="https://doi.org/10.1109/TETCI.2026.3683713">Paper</a><a href="https://github.com/Czy-Trevor/C2RFuzzyFramework">Code</a></p>
+            </div>
+          </article>
+
+          <article class="paper">
+            <div class="paper-media"><span class="paper-badge">TBME · Under Review</span><img src="images/papers/mcl-align.png" alt="MCL-Align illustration of marginal, conditional, and label shifts in cross-subject EEG regression"></div>
+            <div class="paper-text">
+              <h4 class="paper-title">MCL-Align: Marginal–Conditional–Label Alignment for Cross-Subject EEG Regression</h4>
+              <p class="authors"><strong>Zhenyao Cui</strong>, Jiahui Chai, Siyuan Kan, Yudi Wang, Dongrui Wu</p>
+              <p class="paper-outlet">IEEE Transactions on Biomedical Engineering, under review</p>
+              <p class="paper-summary"><strong>Short Summary:</strong> Cross-subject EEG regression shifts in three places at once: the signal distribution, the feature–label relationship, and each subject’s label scale. MCL-Align handles all three with marginal alignment, conditional-direction matching, and label standardization.</p>
+              <p class="paper-links"><span class="pending">Manuscript available on request</span></p>
+            </div>
+          </article>
+
+          <article class="paper">
+            <div class="paper-media"><span class="paper-badge">JBHI · Accepted</span><img class="tall" src="images/papers/bft.png" alt="Deployment challenges addressed by backpropagation-free test-time adaptation for EEG decoding"></div>
+            <div class="paper-text">
+              <h4 class="paper-title">Backpropagation-Free Test-Time Adaptation for Lightweight EEG-Based Brain-Computer Interfaces</h4>
+              <p class="authors">Siyang Li†, Jiayi Ouyang†, <strong>Zhenyao Cui†</strong>, Ziwei Wang, Tianwang Jia, Feng Wan, Dongrui Wu</p>
+              <p class="paper-outlet">IEEE Journal of Biomedical and Health Informatics, accepted · Equal first author</p>
+              <p class="paper-summary"><strong>Short Summary:</strong> Test-time adaptation is attractive for streaming BCIs, but most methods update model weights and assume white-box access. BFT uses forward-only, reliability-weighted transformations for lightweight and quantized deployment.</p>
+              <p class="paper-links"><a href="https://arxiv.org/abs/2601.07556">arXiv</a><a href="https://arxiv.org/pdf/2601.07556">PDF</a></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="research-group">
+          <h3 class="research-group-title">Neural–Visual Representation Learning</h3>
+          <p class="research-group-copy">Cross-subject and few-repetition brain-to-image retrieval.</p>
+
+          <article class="paper">
+            <div class="paper-media paper-cover"><span class="paper-badge">Preprint Soon</span><div><strong>SCORE</strong><span>Cross-subject EEG → image retrieval</span></div></div>
+            <div class="paper-text">
+              <h4 class="paper-title">SCORE: Subject Coordinate Recovery for Label-Free Cross-Subject EEG-to-Image Retrieval</h4>
+              <p class="authors"><strong>Zhenyao Cui</strong>, Siyuan Kan, Siyang Li, Ziwei Wang, Dongrui Wu</p>
+              <p class="paper-outlet">Manuscript under review</p>
+              <p class="paper-summary"><strong>Short Summary:</strong> EEG–image relations can be consistent across people while appearing in different subject-specific coordinates. SCORE recovers the coordinates of an unseen subject without target labels, source EEG at deployment, or encoder updates.</p>
+              <p class="paper-links"><span class="pending">Preprint coming soon</span></p>
+            </div>
+          </article>
+
+          <article class="paper">
+            <div class="paper-media paper-cover"><span class="paper-badge">Preprint Soon</span><div><strong>NEAR</strong><span>Few-repetition neural retrieval</span></div></div>
+            <div class="paper-text">
+              <h4 class="paper-title">Beyond Trial Averaging: Anchoring Neural and Visual Representations for Few-Repetition Brain-to-Image Retrieval</h4>
+              <p class="authors"><strong>Zhenyao Cui</strong>, Siyuan Kan, Dingkun Liu, Dongrui Wu</p>
+              <p class="paper-outlet">Manuscript under review</p>
+              <p class="paper-summary"><strong>Short Summary:</strong> Few-repetition neural retrieval fails for more than noisy queries: the image gallery can also be misaligned. NEAR uses a stable high-repetition neural representation as a common anchor for both the neural query and the visual gallery.</p>
+              <p class="paper-links"><span class="pending">Preprint coming soon</span></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="research-group">
+          <h3 class="research-group-title">Multimodal &amp; Foundation Models</h3>
+          <p class="research-group-copy">Benchmarking transferable EEG representations and learning with complementary modalities.</p>
+
+          <article class="paper">
+            <div class="paper-media"><span class="paper-badge">NSR 2026</span><img src="images/papers/eeg-fm-compass.png" alt="Overview of EEG foundation models trained on heterogeneous EEG signals and evaluated across BCI paradigms"></div>
+            <div class="paper-text">
+              <h4 class="paper-title">EEG-FM-Compass: Progress, Benchmarking, and Future Directions for EEG Foundation Models</h4>
+              <p class="authors">Dingkun Liu, Yuheng Chen, Zhu Chen, <strong>Zhenyao Cui</strong>, Yaozhi Wen, Jiayu An, Jingwei Luo, Dongrui Wu</p>
+              <p class="paper-outlet">National Science Review, accepted, 2026</p>
+              <p class="paper-summary"><strong>Short Summary:</strong> A survey and controlled benchmark of EEG foundation models, covering 55 models and evaluating 12 open-source models across 13 datasets to examine cross-subject generalization, few-shot calibration, and scaling behavior.</p>
+              <p class="paper-links"><a href="https://arxiv.org/abs/2601.17883">arXiv</a><a href="https://arxiv.org/pdf/2601.17883">PDF</a></p>
+            </div>
+          </article>
+
+          <article class="paper">
+            <div class="paper-media"><span class="paper-badge">TAFFC 2026</span><img class="tall" src="images/papers/cmcrd.png" alt="CMCRD teacher-student architecture for transferring eye-movement information to an EEG emotion classifier"></div>
+            <div class="paper-text">
+              <h4 class="paper-title">CMCRD: Cross-Modal Contrastive Representation Distillation for Emotion Recognition</h4>
+              <p class="authors">Siyuan Kan, Huanyu Wu, <strong>Zhenyao Cui</strong>, Fan Huang, Xiaolong Xu, Dongrui Wu</p>
+              <p class="paper-outlet">IEEE Transactions on Affective Computing, 2026</p>
+              <p class="paper-summary"><strong>Short Summary:</strong> CMCRD uses a stronger auxiliary modality during training while keeping inference unimodal. Contrastive representation distillation transfers complementary information between EEG and eye movements without requiring both sensors at test time.</p>
+              <p class="paper-links"><a href="https://doi.org/10.1109/TAFFC.2026.3664341">Paper</a><a href="https://arxiv.org/abs/2504.09221">arXiv</a></p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2 class="section-title">Projects &amp; Selected Awards</h2>
+        <ul class="project-list">
+          <li><strong>Fast and Accurate EEG-Controlled Robotic Arm:</strong> designed the EEG paradigm, decoder, and closed-loop control system; National Champion at the 2025 China Brain-Computer Interface Competition.</li>
+          <li><strong>ECoG-Based Limb-Movement Intention Decoding:</strong> developed a decoder for continuous limb-movement intentions; First Prize at the 2024 World Robot Contest Championship.</li>
+          <li><strong>Outstanding Graduate of HUST</strong>, 2024.</li>
         </ul>
       </section>
 
