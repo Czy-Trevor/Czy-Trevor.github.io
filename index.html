@@ -97,7 +97,8 @@
     .bio { font-size: 1em; }
     .research-interests { margin-top: 13px; }
 
-    .focus-intro { color: var(--muted); margin-bottom: 8px; }
+    .focus-intro { color: var(--muted); margin-bottom: 10px; font-size: 1.02em; }
+    .focus-intro strong { color: var(--ink); }
     .focus-list { border-top: 1px solid var(--rule); }
     .focus-item { padding: 18px 0 16px; border-bottom: 1px solid var(--rule); }
     .focus-item h3 { margin: 0 0 7px; font-size: 1.05em; line-height: 1.4; }
@@ -254,25 +255,24 @@
       <section id="about">
         <h2 class="section-title">Short Bio</h2>
         <div class="bio">
-          <p>I am an M.Eng. student in Intelligent Science and Technology at Huazhong University of Science and Technology (HUST). I am fortunate to be advised by <a href="https://sites.google.com/site/drwuhust/home">Prof. Dongrui Wu</a>, an IEEE Fellow and the Editor-in-Chief of IEEE Transactions on Fuzzy Systems.</p>
-          <p>My research broadly spans machine learning, neural decoding and brain–computer interfaces, multimodal and cross-modal learning, and transfer learning. I am especially interested in models that generalize across people, modalities, and changing data conditions.</p>
+          <p>I am an M.Eng. student in Intelligent Science and Technology at Huazhong University of Science and Technology (HUST). I am deeply grateful to my advisor, <a href="https://sites.google.com/site/drwuhust/home">Prof. Dongrui Wu</a>, an IEEE Fellow and the Editor-in-Chief of IEEE Transactions on Fuzzy Systems. His rigorous mentorship and generous guidance have profoundly shaped how I identify meaningful research problems, develop principled methods, and connect machine learning with real-world brain–computer interfaces.</p>
+          <p>My research centers on machine learning for reliable and generalizable neural interfaces. I aim to build neural decoding systems that remain accurate, data-efficient, and usable across people, recording conditions, and deployment settings.</p>
           <p>I expect to graduate in June 2027 and am seeking Ph.D. opportunities starting in Fall 2027.</p>
-          <p class="research-interests"><strong>Research Interests:</strong> neural decoding, machine learning, multimodal and cross-modal learning, and transfer learning.</p>
         </div>
       </section>
 
       <section id="focus">
-        <h2 class="section-title">Current Research</h2>
-        <p class="focus-intro">My current research is organized around two connected directions:</p>
+        <h2 class="section-title">Research Focus</h2>
+        <p class="focus-intro"><strong>Machine Learning for Reliable and Generalizable Neural Interfaces.</strong> My research aims to move neural decoding beyond controlled laboratory settings by improving accuracy, generalization, data efficiency, and deployability. I approach this goal through two connected themes:</p>
         <div class="focus-list">
           <article class="focus-item">
-            <h3><span aria-hidden="true">🧠</span>Transferable Neural Decoding and Brain–Computer Interfaces</h3>
-            <p>Neural decoding models must cope with large subject-to-subject variation, continuous targets, limited calibration data, and practical deployment constraints. I study transfer learning and test-time adaptation methods that make EEG decoding more reliable across users and conditions.</p>
+            <h3><span aria-hidden="true">🧠</span>Generalizable and Practical Neural Decoding</h3>
+            <p>I study how neural decoding models can transfer across people, sessions, tasks, and recording conditions; adapt with limited target data; manage prediction uncertainty; and remain efficient enough for practical brain–computer interface deployment.</p>
             <p><strong>Representative work:</strong> <a href="https://doi.org/10.1109/TETCI.2026.3683713">C2R (IEEE TETCI 2026)</a> extends class-conditional transfer to continuous regression with fuzzy sets and a target-domain risk bound; <a href="#paper-mcl">MCL-Align (IEEE TBME, under review)</a> jointly aligns marginal, conditional, and label distributions; and <a href="https://arxiv.org/abs/2601.07556">BFT (IEEE JBHI 2026)</a> combines data augmentation, Monte Carlo-dropout-inspired feature masking, and learning-to-rank to reduce test-time uncertainty without backpropagation.</p>
           </article>
           <article class="focus-item">
-            <h3><span aria-hidden="true">🔗</span>Multimodal and Cross-Modal Neural Representation Learning</h3>
-            <p>I study how neural representations connect to images and other modalities, especially when subject-specific geometry and noisy, few-repetition signals disrupt cross-modal alignment.</p>
+            <h3><span aria-hidden="true">🔗</span>Multimodal and Cross-Modal Neural Interfaces</h3>
+            <p>I study how neural signals can be aligned with vision and other modalities to support richer neural interfaces, and how to preserve this alignment across subjects and under noisy, few-repetition measurements.</p>
             <p><strong>Representative work:</strong> <a href="https://arxiv.org/abs/2608.19134">SCORE</a> identifies systematic cross-subject coordinate differences and recovers an unseen subject’s coordinates through reliable EEG–image anchors and orthogonal reorientation; <a href="https://arxiv.org/abs/2608.19128">NEAR</a> identifies a non-transitive alignment pattern under few repetitions and uses the high-repetition neural center to anchor both queries and gallery images.</p>
           </article>
         </div>
