@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Zhenyao Cui — machine learning, neural signal processing, multimodal learning, and adaptive systems.">
+  <meta name="description" content="Zhenyao Cui — neural decoding, brain–computer interfaces, transfer learning, and multimodal and cross-modal machine learning.">
   <meta name="author" content="Zhenyao Cui">
   <meta name="theme-color" content="#ffffff">
   <title>Zhenyao Cui</title>
@@ -96,6 +96,14 @@
     p { margin: 0 0 .7em; }
     .bio { font-size: 1em; }
     .research-interests { margin-top: 13px; }
+
+    .focus-intro { color: var(--muted); margin-bottom: 8px; }
+    .focus-list { border-top: 1px solid var(--rule); }
+    .focus-item { padding: 18px 0 16px; border-bottom: 1px solid var(--rule); }
+    .focus-item h3 { margin: 0 0 7px; font-size: 1.05em; line-height: 1.4; }
+    .focus-item h3 span { display: inline-block; width: 1.55em; }
+    .focus-item p { margin: 0 0 8px; }
+    .focus-item p:last-child { margin-bottom: 0; color: #484e51; }
 
     .news { list-style: none; margin: 0; padding: 0; }
     .news li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding: 5px 0; }
@@ -204,7 +212,7 @@
     "jobTitle": "M.Eng. Student",
     "affiliation": {"@type": "CollegeOrUniversity", "name": "Huazhong University of Science and Technology"},
     "sameAs": ["https://github.com/Czy-Trevor", "https://dblp.org/pid/405/2772.html"],
-    "knowsAbout": ["Machine learning", "Neural signal processing", "Multimodal learning", "Adaptive systems", "Brain-computer interfaces"]
+    "knowsAbout": ["Machine learning", "Neural decoding", "Brain-computer interfaces", "Transfer learning", "Multimodal learning", "Cross-modal learning"]
   }
   </script>
 </head>
@@ -217,7 +225,8 @@
         <a href="#about">About</a>
         <a href="#news">News</a>
         <a href="#education">Education</a>
-        <a href="#research">Research</a>
+        <a href="#focus">Research</a>
+        <a href="#research">Publications</a>
         <a href="files/ZhenyaoCui_CV.pdf">CV</a>
       </nav>
     </div>
@@ -246,10 +255,26 @@
         <h2 class="section-title">Short Bio</h2>
         <div class="bio">
           <p>I am an M.Eng. student in Intelligent Science and Technology at Huazhong University of Science and Technology (HUST). I am fortunate to be advised by <a href="https://sites.google.com/site/drwuhust/home">Prof. Dongrui Wu</a>, an IEEE Fellow and the Editor-in-Chief of IEEE Transactions on Fuzzy Systems.</p>
-          <p>My research interests are broadly in machine learning, neural signal processing, and multimodal learning. I am especially interested in methods that remain reliable when data are noisy, limited, or collected under changing conditions.</p>
-          <p>My current work uses neural signals as a testbed for studying representation learning, transfer, and efficient adaptation, with applications to brain–computer interfaces and cross-modal understanding.</p>
+          <p>My research broadly spans machine learning, neural decoding and brain–computer interfaces, multimodal and cross-modal learning, and transfer learning. I am especially interested in models that generalize across people, modalities, and changing data conditions.</p>
           <p>I expect to graduate in June 2027 and am seeking Ph.D. opportunities starting in Fall 2027.</p>
-          <p class="research-interests"><strong>Research Interests:</strong> machine learning, neural signal processing, multimodal learning, and adaptive systems.</p>
+          <p class="research-interests"><strong>Research Interests:</strong> neural decoding, machine learning, multimodal and cross-modal learning, and transfer learning.</p>
+        </div>
+      </section>
+
+      <section id="focus">
+        <h2 class="section-title">Current Research</h2>
+        <p class="focus-intro">My current research is organized around two connected directions:</p>
+        <div class="focus-list">
+          <article class="focus-item">
+            <h3><span aria-hidden="true">🧠</span>Transferable Neural Decoding and Brain–Computer Interfaces</h3>
+            <p>Neural decoding models must cope with large subject-to-subject variation, continuous targets, limited calibration data, and practical deployment constraints. I study transfer learning and test-time adaptation methods that make EEG decoding more reliable across users and conditions.</p>
+            <p><strong>Representative work:</strong> <a href="https://doi.org/10.1109/TETCI.2026.3683713">C2R (IEEE TETCI 2026)</a> extends class-conditional transfer to continuous regression with fuzzy sets and a target-domain risk bound; <a href="#paper-mcl">MCL-Align (IEEE TBME, under review)</a> jointly aligns marginal, conditional, and label distributions; and <a href="https://arxiv.org/abs/2601.07556">BFT (IEEE JBHI 2026)</a> combines data augmentation, Monte Carlo-dropout-inspired feature masking, and learning-to-rank to reduce test-time uncertainty without backpropagation.</p>
+          </article>
+          <article class="focus-item">
+            <h3><span aria-hidden="true">🔗</span>Multimodal and Cross-Modal Neural Representation Learning</h3>
+            <p>I study how neural representations connect to images and other modalities, especially when subject-specific geometry and noisy, few-repetition signals disrupt cross-modal alignment.</p>
+            <p><strong>Representative work:</strong> <a href="https://arxiv.org/abs/2608.19134">SCORE</a> identifies systematic cross-subject coordinate differences and recovers an unseen subject’s coordinates through reliable EEG–image anchors and orthogonal reorientation; <a href="https://arxiv.org/abs/2608.19128">NEAR</a> identifies a non-transitive alignment pattern under few repetitions and uses the high-repetition neural center to anchor both queries and gallery images.</p>
+          </article>
         </div>
       </section>
 
@@ -259,8 +284,8 @@
           <li><time>2026.08</time><span><a href="https://arxiv.org/abs/2608.19134">SCORE</a> and <a href="https://arxiv.org/abs/2608.19128">Beyond Trial Averaging (NEAR)</a> are now available on arXiv.</span></li>
           <li><time>2026.08</time><span>BFT was accepted for publication in <em>IEEE Journal of Biomedical and Health Informatics</em>.</span></li>
           <li><time>2026.06</time><span>C2R appeared in <em>IEEE Transactions on Emerging Topics in Computational Intelligence</em> Early Access.</span></li>
-          <li><time>2025.12</time><span>Our EEG-controlled robotic arm won the national championship at the China Brain-Computer Interface Competition.</span></li>
-          <li><time>2024</time><span>First Prize at the World Robot Contest Championship for ECoG-based limb-movement intention decoding.</span></li>
+          <li><time>2025.12</time><span>Our SSVEP-controlled robotic arm won the national championship in the Brain-Controlled Robotic Arm track of the China Brain-Computer Interface Competition.</span></li>
+          <li><time>2024</time><span>First Prize at the World Robot Contest Championship for porcine ECoG-based continuous joint-motion decoding.</span></li>
         </ul>
       </section>
 
@@ -282,11 +307,11 @@
         <h2 class="section-title">Industrial Experience</h2>
         <div class="timeline">
           <article class="timeline-row">
-            <div><h3>Alibaba Cloud Intelligence Group · Research Intern</h3><p><strong>Generalizable Fault-Prediction Embeddings:</strong> developing reusable cloud-log representations for fault prediction across heterogeneous systems.</p><p><strong>AutoResearch Development:</strong> developing an internal workflow for automated experimentation and research iteration.</p></div>
-            <time>2026.07 – Present</time>
+            <div><h3>Alibaba Cloud Intelligence Group · Research Intern</h3><p><strong>ECS Log Foundation Embeddings:</strong> developed a domain-specific tokenizer, contrastive pretraining objectives, and a temporal-attention downstream classifier, improving F1 on production server logs from 0.4383 to 0.5306 (+21.1% relative).</p><p><strong>AutoResearch Platform:</strong> contributed to an internal platform that lets an agent iteratively improve task performance from a specified problem definition, code branch, and evaluation metrics.</p></div>
+            <time>2026.04 – Present</time>
           </article>
           <article class="timeline-row">
-            <div><h3>Dongfeng Motor Group · Project Lead</h3><p>Led a multimodal intelligent-cockpit evaluation project from protocol and corpus design to EEG, speech, and facial-cue modeling and delivery.</p></div>
+            <div><h3>Dongfeng Motor Group · Project Lead</h3><p>Developed a multimodal intelligent-cockpit evaluation framework integrating EEG, images, audio, and text to assess users’ subjective experience of in-vehicle functions.</p></div>
             <time>2025.06 – 2026.06</time>
           </article>
         </div>
@@ -296,57 +321,57 @@
         <h2 class="section-title">Selected Publications</h2>
         <p class="research-note">First-author papers are listed first. † denotes equal contribution. Public links are provided where available.</p>
 
-        <article class="paper">
+        <article class="paper" id="paper-c2r">
           <div class="paper-media"><span class="paper-badge">TETCI 2026</span><img src="images/papers/c2r.png" alt="C2R comparison of class-conditional alignment for classification and fuzzy class-conditional alignment for regression"></div>
           <div class="paper-text">
             <h3 class="paper-title">A Fuzzy Set Based Classification-to-Regression Extension Framework for Transfer Learning and Its Application to Brain-Computer Interfaces</h3>
             <p class="authors"><strong>Zhenyao Cui</strong>, Siyang Li, Siyuan Kan, Yudi Wang, Fei Luo, Dongrui Wu</p>
             <p class="paper-outlet">IEEE Transactions on Emerging Topics in Computational Intelligence, 2026</p>
-            <p class="paper-summary"><strong>Short Summary:</strong> Most transfer-learning methods for BCI regression inherit tools designed for classification, where labels are discrete. C2R replaces hard classes with fuzzy classes over continuous targets, making conditional alignment usable for regression.</p>
-            <p class="paper-links"><a href="https://doi.org/10.1109/TETCI.2026.3683713">Paper</a><a href="https://github.com/Czy-Trevor/C2RFuzzyFramework">Code</a></p>
+            <p class="paper-summary">C2R extends class-conditional transfer learning from classification to continuous EEG regression by replacing hard classes with fuzzy class memberships. It also derives a target-domain transfer-learning error bound based on fuzzy class-conditional probabilities.</p>
+            <p class="paper-links"><a href="https://doi.org/10.1109/TETCI.2026.3683713">Paper</a></p>
           </div>
         </article>
 
-        <article class="paper">
-          <div class="paper-media"><span class="paper-badge">TBME · Under Review</span><img src="images/papers/mcl-align.png" alt="Overview of the MCL-Align framework for marginal, conditional, and label alignment in cross-subject EEG regression"></div>
-          <div class="paper-text">
-            <h3 class="paper-title">MCL-Align: Marginal–Conditional–Label Alignment for Cross-Subject EEG Regression</h3>
-            <p class="authors"><strong>Zhenyao Cui</strong>, Jiahui Chai, Siyuan Kan, Yudi Wang, Dongrui Wu</p>
-            <p class="paper-outlet">IEEE Transactions on Biomedical Engineering, under review</p>
-            <p class="paper-summary"><strong>Short Summary:</strong> Cross-subject EEG regression shifts in three places at once: the signal distribution, the feature–label relationship, and each subject’s label scale. MCL-Align handles all three with marginal alignment, conditional-direction matching, and label standardization.</p>
-            <p class="paper-links"><span class="pending">Manuscript available on request</span></p>
-          </div>
-        </article>
-
-        <article class="paper">
+        <article class="paper" id="paper-score">
           <div class="paper-media"><span class="paper-badge">arXiv 2026</span><img src="images/papers/score.png" alt="Overview of SCORE training and label-free coordinate recovery for cross-subject EEG-to-image retrieval"></div>
           <div class="paper-text">
             <h3 class="paper-title">SCORE: Subject Coordinate Recovery for Label-Free Cross-Subject EEG-to-Image Retrieval</h3>
             <p class="authors"><strong>Zhenyao Cui</strong>, Siyuan Kan, Siyang Li, Ziwei Wang, Dongrui Wu</p>
             <p class="paper-outlet">Manuscript under review · arXiv:2608.19134</p>
-            <p class="paper-summary"><strong>Short Summary:</strong> EEG–image relations can be consistent across people while appearing in different subject-specific coordinates. SCORE recovers the coordinates of an unseen subject without target labels, source EEG at deployment, or encoder updates.</p>
+            <p class="paper-summary">In EEG-to-image retrieval, we find that subjects preserve similar relationships among concepts but express them along systematically different coordinate directions. SCORE selects reliable EEG–image landmarks and estimates an orthogonal reorientation to recover an unseen subject’s coordinates without target labels or source EEG at deployment.</p>
             <p class="paper-links"><a href="https://arxiv.org/abs/2608.19134">arXiv</a><a href="https://arxiv.org/pdf/2608.19134">PDF</a></p>
           </div>
         </article>
 
-        <article class="paper">
+        <article class="paper" id="paper-near">
           <div class="paper-media"><span class="paper-badge">arXiv 2026</span><img src="images/papers/near.png" alt="Training and inference overview of NEAR query anchoring and gallery anchoring"></div>
           <div class="paper-text">
             <h3 class="paper-title">Beyond Trial Averaging: Anchoring Neural and Visual Representations for Few-Repetition Brain-to-Image Retrieval</h3>
             <p class="authors"><strong>Zhenyao Cui</strong>, Siyuan Kan, Dingkun Liu, Dongrui Wu</p>
             <p class="paper-outlet">Manuscript under review · arXiv:2608.19128</p>
-            <p class="paper-summary"><strong>Short Summary:</strong> Few-repetition neural retrieval fails for more than noisy queries: the image gallery can also be misaligned. NEAR uses a stable high-repetition neural representation as a common anchor for both the neural query and the visual gallery.</p>
+            <p class="paper-summary">Under few repetitions, we identify a non-transitive pattern: the low-repetition neural query and the image representation each align with the high-repetition center, but not directly with each other. NEAR uses this center as a common anchor, denoising neural queries and predicting pseudo-anchors for gallery images across EEG, MEG, and fMRI.</p>
             <p class="paper-links"><a href="https://arxiv.org/abs/2608.19128">arXiv</a><a href="https://arxiv.org/pdf/2608.19128">PDF</a></p>
           </div>
         </article>
 
-        <article class="paper">
+        <article class="paper" id="paper-mcl">
+          <div class="paper-media"><span class="paper-badge">TBME · Under Review</span><img src="images/papers/mcl-align.png" alt="Overview of the MCL-Align framework for marginal, conditional, and label alignment in cross-subject EEG regression"></div>
+          <div class="paper-text">
+            <h3 class="paper-title">MCL-Align: Marginal–Conditional–Label Alignment for Cross-Subject EEG Regression</h3>
+            <p class="authors"><strong>Zhenyao Cui</strong>, Jiahui Chai, Siyuan Kan, Yudi Wang, Dongrui Wu</p>
+            <p class="paper-outlet">IEEE Transactions on Biomedical Engineering, under review</p>
+            <p class="paper-summary">MCL-Align provides comprehensive probability alignment for cross-subject EEG regression. It jointly aligns marginal trial distributions, the direction of feature–label dependencies, and subject-specific label scale and offset through Euclidean Alignment, Conditional Direction Matching, and label standardization.</p>
+            <p class="paper-links"><span class="pending">Manuscript available on request</span></p>
+          </div>
+        </article>
+
+        <article class="paper" id="paper-bft">
           <div class="paper-media"><span class="paper-badge">JBHI · Accepted</span><img class="tall" src="images/papers/bft.png" alt="Training and inference of BFT reliability ranking and prediction aggregation for classification and regression"></div>
           <div class="paper-text">
             <h3 class="paper-title">Backpropagation-Free Test-Time Adaptation for Lightweight EEG-Based Brain-Computer Interfaces</h3>
             <p class="authors">Siyang Li†, Jiayi Ouyang†, <strong>Zhenyao Cui†</strong>, Ziwei Wang, Tianwang Jia, Feng Wan, Dongrui Wu</p>
             <p class="paper-outlet">IEEE Journal of Biomedical and Health Informatics, accepted · Equal first author</p>
-            <p class="paper-summary"><strong>Short Summary:</strong> Test-time adaptation is attractive for streaming BCIs, but most methods update model weights and assume white-box access. BFT uses forward-only, reliability-weighted transformations for lightweight and quantized deployment.</p>
+            <p class="paper-summary">BFT combines knowledge-guided EEG augmentation, Monte Carlo-dropout-inspired feature masking, and a source-trained learning-to-rank module. It ranks and aggregates transformed predictions to reduce instance-level uncertainty and improve transferability without test-time backpropagation, including for lightweight and quantized BCI models.</p>
             <p class="paper-links"><a href="https://arxiv.org/abs/2601.07556">arXiv</a><a href="https://arxiv.org/pdf/2601.07556">PDF</a></p>
           </div>
         </article>
@@ -357,7 +382,7 @@
             <h3 class="paper-title">EEG-FM-Compass: Progress, Benchmarking, and Future Directions for EEG Foundation Models</h3>
             <p class="authors">Dingkun Liu, Yuheng Chen, Zhu Chen, <strong>Zhenyao Cui</strong>, Yaozhi Wen, Jiayu An, Jingwei Luo, Dongrui Wu</p>
             <p class="paper-outlet">National Science Review, accepted, 2026</p>
-            <p class="paper-summary"><strong>Short Summary:</strong> A survey and controlled benchmark of EEG foundation models, covering 55 models and evaluating 12 open-source models across 13 datasets to examine cross-subject generalization, few-shot calibration, and scaling behavior.</p>
+            <p class="paper-summary">This work reviews how EEG foundation models learn from heterogeneous neural signals, benchmarks open-source models under unified protocols, and identifies open problems in cross-subject generalization, few-shot calibration, and scaling.</p>
             <p class="paper-links"><a href="https://arxiv.org/abs/2601.17883">arXiv</a><a href="https://arxiv.org/pdf/2601.17883">PDF</a></p>
           </div>
         </article>
@@ -368,7 +393,7 @@
             <h3 class="paper-title">CMCRD: Cross-Modal Contrastive Representation Distillation for Emotion Recognition</h3>
             <p class="authors">Siyuan Kan, Huanyu Wu, <strong>Zhenyao Cui</strong>, Fan Huang, Xiaolong Xu, Dongrui Wu</p>
             <p class="paper-outlet">IEEE Transactions on Affective Computing, 2026</p>
-            <p class="paper-summary"><strong>Short Summary:</strong> CMCRD uses a stronger auxiliary modality during training while keeping inference unimodal. Contrastive representation distillation transfers complementary information between EEG and eye movements without requiring both sensors at test time.</p>
+            <p class="paper-summary">CMCRD uses a stronger auxiliary modality during training while keeping inference unimodal. Contrastive representation distillation transfers complementary information between EEG and eye movements without requiring both sensors at test time.</p>
             <p class="paper-links"><a href="https://doi.org/10.1109/TAFFC.2026.3664341">Paper</a><a href="https://arxiv.org/abs/2504.09221">arXiv</a></p>
           </div>
         </article>
@@ -377,8 +402,8 @@
       <section id="projects">
         <h2 class="section-title">Competitions, Projects &amp; Awards</h2>
         <ul class="project-list">
-          <li><strong>National Champion, China Brain-Computer Interface Competition, 2025:</strong> designed the EEG paradigm, decoder, and closed-loop control system for a fast and accurate brain-controlled robotic arm. Following the competition, I was interviewed by <a href="https://news.cctv.com/2025/12/07/ARTI4f1uik9SzUovK4dYCWTg251207.shtml">CCTV</a> and the <a href="https://www.globaltimes.cn/page/202512/1349778.shtml">Global Times</a> about the system and the practical development of BCI technology.</li>
-          <li><strong>First Prize, World Robot Contest Championship, 2024:</strong> developed an ECoG-based decoder for continuous limb-movement intentions.</li>
+          <li><strong>National Champion, Brain-Controlled Robotic Arm track, China Brain-Computer Interface Competition, 2025:</strong> built an SSVEP acquisition and decoding system for fast, precise robotic-arm control, using position-aware adaptive step sizing to balance movement speed and endpoint precision. The competition and championship result were covered by <a href="https://news.cctv.com/2025/12/07/ARTI4f1uik9SzUovK4dYCWTg251207.shtml">CCTV</a> and the <a href="https://www.globaltimes.cn/page/202512/1349778.shtml">Global Times</a>.</li>
+          <li><strong>First Prize, World Robot Contest Championship, 2024:</strong> developed a porcine ECoG-based continuous joint-motion decoding algorithm with a segment-slicing augmentation method tailored to recurring joint-motion patterns during running.</li>
           <li><strong>Huawei Scholarship</strong>, 2021–22.</li>
           <li><strong>Outstanding Graduate of HUST</strong>, 2024.</li>
         </ul>
