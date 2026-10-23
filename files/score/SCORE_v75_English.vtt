@@ -1,0 +1,1152 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.040
+Every day, we see so many things: the trees, the sky, and the screen in front of us.
+
+2
+00:00:06.640 --> 00:00:08.100
+It all seems effortless.
+
+3
+00:00:09.020 --> 00:00:15.120
+But as you recognize these things, your visual system
+is already turning the light entering your eyes into
+
+4
+00:00:15.120 --> 00:00:20.480
+neural signals, and groups of neurons in your brain
+are working to make sense of that information.
+
+5
+00:00:21.520 --> 00:00:27.420
+The electrical signals produced by this brain activity
+are very faint, but we have ways to measure them.
+
+6
+00:00:27.420 --> 00:00:32.955
+An EEG cap, for example, can pick up tiny changes in voltage at the scalp.
+
+7
+00:00:33.855 --> 00:00:39.815
+And hidden in those faint, noisy recordings, there
+may be clues about which image someone just saw.
+
+8
+00:00:40.615 --> 00:00:45.555
+Studying these responses can help us understand
+how the brain processes visual information.
+
+9
+00:00:46.475 --> 00:00:51.515
+It can also help us explore ways to reconstruct
+what a person has seen from their brain activity.
+
+10
+00:00:52.315 --> 00:00:57.255
+It's easy to imagine that different pictures might
+produce different patterns of brain activity.
+
+11
+00:00:58.055 --> 00:00:59.695
+So let's turn the problem around.
+
+12
+00:01:00.535 --> 00:01:02.678
+Suppose I give you an EEG recording.
+
+13
+00:01:03.558 --> 00:01:05.778
+Could you work out which picture this person saw?
+
+14
+00:01:06.498 --> 00:01:09.423
+That's the idea behind EEG-to-image retrieval.
+
+15
+00:01:10.383 --> 00:01:16.060
+In a typical setup, we give the model an EEG recording
+and a gallery of two hundred candidate images.
+
+16
+00:01:16.780 --> 00:01:18.760
+Its job is to find the right one.
+
+17
+00:01:19.620 --> 00:01:24.899
+But here's a problem: EEG and images are two very different kinds of data.
+
+18
+00:01:25.719 --> 00:01:27.439
+How is a model supposed to compare them?
+
+19
+00:01:28.159 --> 00:01:36.191
+One common approach is to use two encoders, one for EEG and
+another for images, and map their features into the same space.
+
+20
+00:01:36.951 --> 00:01:46.313
+By training on many EEG–image pairs, the model learns to match EEG signals
+with the right pictures, even if those pictures were never seen during training.
+
+21
+00:01:47.153 --> 00:01:51.793
+When we have plenty of training data from the
+same person, this can work surprisingly well.
+
+22
+00:01:52.533 --> 00:01:57.992
+In a zero-shot setting on THINGS-EEG2, with
+two hundred candidate images that were not
+
+23
+00:01:57.992 --> 00:02:03.932
+used in training, some within-subject methods reach
+roughly eighty-five to ninety-one percent accuracy.
+
+24
+00:02:04.892 --> 00:02:06.692
+That sounds pretty good already, doesn't it?
+
+25
+00:02:07.172 --> 00:02:11.536
+But when we put that EEG cap on someone new, things get much harder.
+
+26
+00:02:11.536 --> 00:02:17.703
+The model hasn't seen any labeled EEG from this
+person and has only been trained on other subjects.
+
+27
+00:02:18.543 --> 00:02:23.703
+In our benchmark, even the strongest baseline
+reaches only about thirty-six percent accuracy.
+
+28
+00:02:24.583 --> 00:02:29.835
+Of course, we could collect labeled EEG data
+to calibrate the model for every new person.
+
+29
+00:02:30.395 --> 00:02:36.435
+But that takes extra time and effort, and we'd have
+to do it over and over again, for each new user.
+
+30
+00:02:37.055 --> 00:02:38.575
+So what's going on?
+
+31
+00:02:39.195 --> 00:02:44.515
+Why can the model read signals from a familiar
+person so well, yet struggle with someone new?
+
+32
+00:02:45.275 --> 00:02:51.976
+Your first thought might be: well, different people have
+different brains, so their EEG responses can differ too.
+
+33
+00:02:52.746 --> 00:02:58.126
+So we could show different people the same
+pictures and compare their raw EEG waveforms.
+
+34
+00:02:58.806 --> 00:03:06.426
+However, those waveforms are affected by all sorts of things:
+recording conditions, background brain activity, and noise.
+
+35
+00:03:07.266 --> 00:03:11.706
+Even if two signals look different, it's still hard to tell what that difference means.
+
+36
+00:03:12.666 --> 00:03:14.406
+So let's try another approach.
+
+37
+00:03:15.166 --> 00:03:19.232
+We look at the relationships between the EEG features for different pictures.
+
+38
+00:03:19.232 --> 00:03:24.352
+For one person, how similar are their responses to a cup and a car?
+
+39
+00:03:25.072 --> 00:03:28.092
+And is that relationship still there when we move to someone else?
+
+40
+00:03:28.952 --> 00:03:34.122
+To compare the EEG features for the cup and the car, we use cosine similarity.
+
+41
+00:03:35.182 --> 00:03:42.222
+It measures how closely two feature vectors point in the same
+direction: the more similar their directions, the higher the score.
+
+42
+00:03:43.242 --> 00:03:45.022
+Now suppose we have ten pictures.
+
+43
+00:03:45.022 --> 00:03:50.282
+We calculate the similarity for every pair and arrange the scores in a matrix.
+
+44
+00:03:51.242 --> 00:03:55.722
+The cup–car score, for example, goes where the cup's row meets the car's column.
+
+45
+00:03:56.522 --> 00:04:00.942
+This gives us a representational similarity matrix, or RSM.
+
+46
+00:04:01.922 --> 00:04:07.041
+It summarizes the relationships between these
+pictures' EEG features within one person.
+
+47
+00:04:08.041 --> 00:04:13.701
+And now we can ask: if different people see
+the same pictures, will their RSMs look alike?
+
+48
+00:04:14.481 --> 00:04:20.461
+Let's put different people's RSMs side by side, with
+the same image order and the same color scale.
+
+49
+00:04:21.241 --> 00:04:21.841
+Hmm.
+
+50
+00:04:22.421 --> 00:04:24.481
+They look surprisingly similar, don't they?
+
+51
+00:04:25.062 --> 00:04:32.282
+To put a number on that, we compare the similarity values at
+corresponding positions in the matrices and calculate their correlation.
+
+52
+00:04:33.342 --> 00:04:37.842
+Across target and source subjects, the average is about zero point six nine.
+
+53
+00:04:38.702 --> 00:04:39.602
+That's quite high.
+
+54
+00:04:40.462 --> 00:04:46.467
+It suggests that the EEG features for these pictures
+form roughly similar structures within each person.
+
+55
+00:04:47.147 --> 00:04:50.107
+Think of them as constellations with similar shapes.
+
+56
+00:04:50.727 --> 00:04:52.767
+But that leaves us with a puzzle.
+
+57
+00:04:53.287 --> 00:04:58.447
+If the relationships are so similar, why is cross-subject retrieval still so poor?
+
+58
+00:04:59.367 --> 00:05:02.827
+Imagine we're exploring a galaxy with a map of five stars.
+
+59
+00:05:03.487 --> 00:05:08.647
+We know where the stars are, and we've learned which
+direction to steer our spaceship to reach each one.
+
+60
+00:05:09.407 --> 00:05:12.847
+Now we want to use that map to navigate another galaxy.
+
+61
+00:05:13.627 --> 00:05:17.627
+If the stars form the same pattern, we might expect the same directions to work.
+
+62
+00:05:18.247 --> 00:05:19.447
+But what if they don't?
+
+63
+00:05:19.767 --> 00:05:22.107
+What if we keep heading toward the wrong star?
+
+64
+00:05:23.107 --> 00:05:27.527
+Here's the catch: the same shape can still face a different direction!
+
+65
+00:05:28.227 --> 00:05:30.927
+In this example, the whole constellation has turned.
+
+66
+00:05:31.647 --> 00:05:37.427
+The relationships between the stars are unchanged, but
+our old directions no longer take us to the right place.
+
+67
+00:05:38.184 --> 00:05:42.180
+Now, let's see if we can spot something like this in real EEG features.
+
+68
+00:05:43.260 --> 00:05:46.300
+Here we have one source subject and one target subject.
+
+69
+00:05:47.220 --> 00:05:52.260
+We take their features for the same pictures and
+project them onto a shared two-dimensional plane.
+
+70
+00:05:53.320 --> 00:05:55.700
+There it is: a clear difference in orientation.
+
+71
+00:05:57.140 --> 00:06:00.760
+Could this help explain why cross-subject retrieval works so poorly?
+
+72
+00:06:01.940 --> 00:06:04.460
+Naturally, you'd ask: can we fix that shift?
+
+73
+00:06:05.100 --> 00:06:07.620
+Why not just rotate the two shapes until they line up?
+
+74
+00:06:07.620 --> 00:06:09.580
+Well, there's a catch.
+
+75
+00:06:10.600 --> 00:06:15.039
+In our earlier analysis, we knew which EEG recording came from which picture.
+
+76
+00:06:15.819 --> 00:06:19.099
+In actual use, we don't know those pairings for the new subject.
+
+77
+00:06:19.919 --> 00:06:27.827
+So we don't know which points should line up, or how to turn the shape
+so that EEG features for the same image end up in the same place.
+
+78
+00:06:28.967 --> 00:06:30.107
+And there's another problem.
+
+79
+00:06:31.207 --> 00:06:32.947
+Training involves several source subjects.
+
+80
+00:06:33.767 --> 00:06:37.107
+Even if we knew the pairings, which source subject should we choose?
+
+81
+00:06:37.927 --> 00:06:46.468
+Finally, in a real deployment, privacy requirements or storage limits
+may mean that we can't even access the original source EEG recordings.
+
+82
+00:06:47.648 --> 00:06:49.568
+So SCORE takes a different approach.
+
+83
+00:06:50.348 --> 00:06:54.814
+We try to align the new subject's EEG features with the image feature space.
+
+84
+00:06:55.474 --> 00:06:58.314
+But what do we mean by the image feature space?
+
+85
+00:06:59.074 --> 00:07:00.934
+Remember the two encoders from earlier?
+
+86
+00:07:01.894 --> 00:07:05.324
+The EEG encoder turns brain responses into feature vectors.
+
+87
+00:07:06.244 --> 00:07:09.902
+We pictured those vectors as stars, making an EEG constellation.
+
+88
+00:07:11.062 --> 00:07:13.282
+Now, let's move to the image side.
+
+89
+00:07:14.102 --> 00:07:18.942
+Feed the candidate pictures through the image
+encoder, and each one gets a feature vector too.
+
+90
+00:07:19.742 --> 00:07:23.002
+Plot those features as points, and we get another constellation.
+
+91
+00:07:24.142 --> 00:07:25.882
+This time, it's an image constellation.
+
+92
+00:07:27.122 --> 00:07:34.168
+We can use this image constellation as a common reference,
+bringing matching EEG and image features into similar positions.
+
+93
+00:07:35.428 --> 00:07:36.508
+Why choose this reference?
+
+94
+00:07:36.888 --> 00:07:38.208
+There are a few reasons.
+
+95
+00:07:39.428 --> 00:07:42.294
+First, our final task is EEG-to-image retrieval.
+
+96
+00:07:43.394 --> 00:07:47.643
+Aligning EEG features with image features works directly toward that goal.
+
+97
+00:07:48.663 --> 00:07:52.903
+Second, for a given retrieval task, we have one shared candidate gallery.
+
+98
+00:07:53.563 --> 00:07:56.963
+So we don't have to choose which source subject should define the reference.
+
+99
+00:07:57.723 --> 00:08:04.678
+Third, during training, we already teach source subjects'
+EEG features to align with their matching image features.
+
+100
+00:08:04.678 --> 00:08:10.918
+The training images may differ from the test
+gallery, but both use the same image feature space.
+
+101
+00:08:11.718 --> 00:08:18.035
+Bringing a new subject's EEG into that space brings it
+toward the same reference the model learned during training.
+
+102
+00:08:19.035 --> 00:08:22.035
+And finally, the gallery is available at test time.
+
+103
+00:08:22.275 --> 00:08:27.125
+So we can still use it even when the original source EEG recordings are unavailable.
+
+104
+00:08:27.985 --> 00:08:34.323
+We call this process coordinate recovery: bringing
+EEG features into the image coordinate system.
+
+105
+00:08:35.063 --> 00:08:39.023
+And that's the idea behind SCORE: Subject Coordinate Recovery.
+
+106
+00:08:39.743 --> 00:08:43.143
+Now, let's look at how the full SCORE framework works.
+
+107
+00:08:43.883 --> 00:08:46.403
+There are two stages: training and testing.
+
+108
+00:08:47.143 --> 00:08:48.123
+We'll start with training.
+
+109
+00:08:49.183 --> 00:08:55.100
+We start with the same basic idea: bring EEG
+features closer to their matching image features.
+
+110
+00:08:55.100 --> 00:08:57.800
+But SCORE adds two new components.
+
+111
+00:08:58.760 --> 00:09:00.840
+The first is Multi-Positive Alignment.
+
+112
+00:09:01.840 --> 00:09:05.220
+During training, different people may have seen the same picture.
+
+113
+00:09:06.040 --> 00:09:10.628
+Their EEG responses might look different, but they all correspond to that picture.
+
+114
+00:09:11.388 --> 00:09:20.060
+So instead of treating just one EEG response as a positive match, we
+treat responses from all source subjects who saw that picture as positives.
+
+115
+00:09:20.840 --> 00:09:24.980
+We bring them closer to the same image feature, rather than pushing them apart.
+
+116
+00:09:25.900 --> 00:09:29.420
+This encourages the model to learn what those subjects have in common.
+
+117
+00:09:30.200 --> 00:09:36.320
+From the coordinate-system perspective, this also helps align
+different source subjects with the same image coordinates.
+
+118
+00:09:37.380 --> 00:09:38.400
+But is that enough?
+
+119
+00:09:39.100 --> 00:09:39.700
+Not necessarily.
+
+120
+00:09:40.700 --> 00:09:48.357
+Even if the source subjects are well aligned during training, a brand-new
+person's EEG features might still end up in a different orientation.
+
+121
+00:09:49.037 --> 00:09:53.197
+So we introduce a second mechanism: Simulated Recovery.
+
+122
+00:09:54.277 --> 00:09:59.297
+In each training batch, we choose one source
+subject to play the role of someone new.
+
+123
+00:10:00.077 --> 00:10:04.402
+First, we temporarily hide the EEG–image pairings for that subject.
+
+124
+00:10:05.302 --> 00:10:13.804
+Then, the recovery procedure sees only the EEG features and the candidate
+image features, and tries to figure out how their coordinates should line up.
+
+125
+00:10:13.804 --> 00:10:21.103
+After recovery, we reveal the hidden pairings and check
+whether the recovered EEG features retrieve the correct images.
+
+126
+00:10:22.043 --> 00:10:26.488
+That gives us a recovery loss, which we use to train the EEG encoder.
+
+127
+00:10:27.248 --> 00:10:30.888
+This lets the model practice working with recovered features during training.
+
+128
+00:10:31.788 --> 00:10:35.228
+We'll leave the details of coordinate recovery until the testing stage.
+
+129
+00:10:35.968 --> 00:10:39.528
+Together, these two components give us SCORE's training objective.
+
+130
+00:10:40.308 --> 00:10:48.948
+Multi-positive alignment replaces the standard pairwise contrastive loss,
+and we add the recovery loss with a weight to control its contribution.
+
+131
+00:10:49.948 --> 00:10:53.588
+And remember: throughout training, we use only the source subjects.
+
+132
+00:10:54.348 --> 00:10:56.948
+We don't have any data from the real target subject.
+
+133
+00:10:57.908 --> 00:11:01.108
+Now training is complete, and the encoders are frozen.
+
+134
+00:11:02.088 --> 00:11:07.569
+All that's available is the trained model, the
+new user's unlabeled EEG, and the test gallery.
+
+135
+00:11:07.569 --> 00:11:12.764
+There are no image labels for this person, and no original source EEG recordings.
+
+136
+00:11:13.704 --> 00:11:15.684
+Let's move on to the testing stage.
+
+137
+00:11:16.424 --> 00:11:23.829
+We'll call the EEG features used for retrieval the queries,
+Q, and the candidate image features the gallery, G.
+
+138
+00:11:24.589 --> 00:11:27.529
+So how can we turn Q toward G?
+
+139
+00:11:28.409 --> 00:11:29.709
+There are three main steps.
+
+140
+00:11:30.709 --> 00:11:32.249
+First, moment matching.
+
+141
+00:11:33.029 --> 00:11:37.229
+Before rotating anything, we align the statistics of Q and G.
+
+142
+00:11:37.889 --> 00:11:44.775
+For each feature dimension, we shift and rescale the EEG
+features to match the gallery's mean and standard deviation.
+
+143
+00:11:45.775 --> 00:11:50.775
+This makes their centers and scales more comparable,
+preparing them for the alignment that follows.
+
+144
+00:11:51.695 --> 00:11:53.575
+Second, landmark selection.
+
+145
+00:11:54.515 --> 00:12:00.995
+Before we can turn Q toward G, we need some matched
+reference points to tell us how their orientations differ.
+
+146
+00:12:01.755 --> 00:12:03.715
+We call these reference pairs landmarks.
+
+147
+00:12:04.715 --> 00:12:08.415
+To see why they help, let's look at a simple two-dimensional example.
+
+148
+00:12:09.215 --> 00:12:12.315
+We have two identical shapes, facing different directions.
+
+149
+00:12:13.115 --> 00:12:15.555
+Suppose we know one correct pair of points.
+
+150
+00:12:16.035 --> 00:12:21.115
+We can pin those points together, but the rest
+of the shape can still turn around that pin.
+
+151
+00:12:22.115 --> 00:12:23.435
+What if we fix two pairs?
+
+152
+00:12:24.255 --> 00:12:28.575
+That fixes the line between them, but the drawing could still flip across that line.
+
+153
+00:12:29.395 --> 00:12:30.195
+And three pairs?
+
+154
+00:12:30.935 --> 00:12:31.575
+There we go!
+
+155
+00:12:32.115 --> 00:12:34.995
+With these three pairs, we can line up the two shapes.
+
+156
+00:12:35.875 --> 00:12:38.295
+These matched reference pairs are our landmarks.
+
+157
+00:12:39.315 --> 00:12:41.675
+But we don't have the new subject's labels.
+
+158
+00:12:42.395 --> 00:12:46.033
+We don't know which EEG recording corresponds to which image.
+
+159
+00:12:46.033 --> 00:12:48.873
+So where do our landmarks come from?
+
+160
+00:12:49.653 --> 00:12:50.893
+Remember the model we trained?
+
+161
+00:12:51.633 --> 00:12:56.653
+Its predictions for a new person may be imperfect, but they still contain useful clues.
+
+162
+00:12:57.513 --> 00:13:01.326
+We can use those predictions to look for promising EEG–image pairs.
+
+163
+00:13:02.366 --> 00:13:06.266
+A natural idea is to choose the pairs with the highest similarity scores.
+
+164
+00:13:07.086 --> 00:13:09.326
+Those seem like the model's most confident matches.
+
+165
+00:13:10.166 --> 00:13:14.326
+But in this setting, a high score doesn't always mean a reliable match.
+
+166
+00:13:14.326 --> 00:13:20.306
+In a high-dimensional space, some points become
+near neighbors of unusually many queries.
+
+167
+00:13:21.166 --> 00:13:22.146
+That's hubness.
+
+168
+00:13:22.886 --> 00:13:29.145
+An image like this can score highly for many different
+EEG queries, even when it isn't the correct match.
+
+169
+00:13:30.025 --> 00:13:36.892
+So before trusting a match, two questions matter:
+is this image attracting too many EEG queries?
+
+170
+00:13:37.672 --> 00:13:42.018
+And does this EEG query give high scores to lots of other images?
+
+171
+00:13:42.018 --> 00:13:44.678
+Both can affect landmark selection.
+
+172
+00:13:45.818 --> 00:13:52.678
+Fortunately, cross-domain similarity local scaling,
+or CSLS, offers a way to reduce this effect.
+
+173
+00:13:53.118 --> 00:14:00.395
+CSLS starts with twice a pair's cosine
+similarity, then subtracts two local averages: the
+
+174
+00:14:00.395 --> 00:14:06.554
+EEG query's similarity to nearby images, and
+the image's similarity to nearby EEG queries.
+
+175
+00:14:07.234 --> 00:14:12.414
+A hub tends to have a high neighborhood average, so it receives a larger penalty.
+
+176
+00:14:13.314 --> 00:14:16.414
+That helps reduce its advantage when selecting landmark pairs.
+
+177
+00:14:17.494 --> 00:14:24.381
+With these corrected scores, SCORE selects a pair only
+when the EEG query and image are each other's first choice.
+
+178
+00:14:25.381 --> 00:14:29.241
+These pairs become landmarks, helping make the selection more reliable.
+
+179
+00:14:30.261 --> 00:14:35.041
+However, because of the distribution shift, some landmarks may still be unreliable.
+
+180
+00:14:35.041 --> 00:14:38.121
+So SCORE also assigns weights.
+
+181
+00:14:39.061 --> 00:14:42.941
+The more confident the model is, the more that pair contributes to the rotation.
+
+182
+00:14:44.121 --> 00:14:46.561
+Now the landmarks and their weights are ready.
+
+183
+00:14:47.301 --> 00:14:48.801
+It's time to recover the coordinates.
+
+184
+00:14:49.801 --> 00:14:51.701
+Third, coordinate recovery.
+
+185
+00:14:53.041 --> 00:14:55.901
+First, let's briefly introduce a rotation matrix.
+
+186
+00:14:56.901 --> 00:15:01.081
+In two dimensions, it takes this form, where theta is the angle of rotation.
+
+187
+00:15:02.241 --> 00:15:06.861
+Multiplying a point's coordinates by this matrix rotates the point by that angle.
+
+188
+00:15:07.601 --> 00:15:13.861
+Besides rotation, SCORE also allows reflection, so it uses an orthogonal matrix, R.
+
+189
+00:15:14.821 --> 00:15:21.401
+Since the landmarks have weights, SCORE first calculates
+their weighted centers, then centers the two sets again.
+
+190
+00:15:22.461 --> 00:15:27.273
+Here, X contains the EEG landmarks, and Y contains their image partners.
+
+191
+00:15:28.273 --> 00:15:32.413
+Subtracting their weighted centers gives X sub c and Y sub c.
+
+192
+00:15:33.153 --> 00:15:35.733
+The matrix W contains the landmark weights.
+
+193
+00:15:36.773 --> 00:15:39.953
+With these definitions, the fitting objective looks like this.
+
+194
+00:15:40.853 --> 00:15:51.175
+Multiply the centered EEG landmarks by R, measure their squared distances from
+the corresponding image landmarks, then weight those distances and add them up.
+
+195
+00:15:51.175 --> 00:15:56.975
+The goal is to find an orthogonal R that makes this total as small as possible.
+
+196
+00:15:57.835 --> 00:16:04.055
+However, the features are high-dimensional, and a limited
+set of reference pairs may leave some directions uncertain.
+
+197
+00:16:05.215 --> 00:16:07.635
+So SCORE adds a regularization term.
+
+198
+00:16:08.555 --> 00:16:13.195
+If there isn't enough information to support a change in a direction, the preference is
+
+199
+00:16:13.195 --> 00:16:18.175
+to stay close to the identity matrix: in other
+words, to leave that direction unchanged.
+
+200
+00:16:19.115 --> 00:16:26.515
+That gives the final objective: the landmark fitting error,
+plus a penalty for moving away from the identity matrix.
+
+201
+00:16:27.375 --> 00:16:29.755
+Lambda controls the strength of that penalty.
+
+202
+00:16:30.695 --> 00:16:32.215
+Now, let's solve it.
+
+203
+00:16:32.995 --> 00:16:36.815
+First, expand the squared fitting error into these three terms.
+
+204
+00:16:37.755 --> 00:16:41.375
+The trace notation here simply adds up a matrix's diagonal entries.
+
+205
+00:16:42.175 --> 00:16:43.535
+Look at the first term.
+
+206
+00:16:43.535 --> 00:16:46.915
+R is orthogonal, so it preserves lengths.
+
+207
+00:16:47.715 --> 00:16:54.175
+Moving the factors around inside the trace brings R
+and R transpose together; their product is the identity.
+
+208
+00:16:55.075 --> 00:16:57.175
+This term no longer depends on R.
+
+209
+00:16:58.215 --> 00:17:00.335
+The last term doesn't depend on R either.
+
+210
+00:17:00.989 --> 00:17:03.549
+Next, expand the regularization term.
+
+211
+00:17:04.249 --> 00:17:10.449
+Again, R transpose times R is the identity,
+leaving a constant and this term involving R.
+
+212
+00:17:11.269 --> 00:17:15.649
+Since those constants don't affect which R
+gives the minimum, they can be removed.
+
+213
+00:17:16.809 --> 00:17:20.549
+Combine the two remaining terms, and the expression becomes much simpler.
+
+214
+00:17:21.549 --> 00:17:26.289
+Minimizing this negative quantity is equivalent to maximizing the trace shown here.
+
+215
+00:17:26.889 --> 00:17:33.309
+Let's call this matrix M: the weighted landmark
+cross-product, plus lambda times the identity.
+
+216
+00:17:34.309 --> 00:17:39.669
+Apply SVD directly to M to obtain U, Sigma, and V transpose.
+
+217
+00:17:40.589 --> 00:17:43.989
+Then the optimal R is U times V transpose.
+
+218
+00:17:44.869 --> 00:17:47.589
+With this matrix, coordinate recovery is straightforward.
+
+219
+00:17:48.709 --> 00:17:57.677
+To transform a moment-matched EEG query, subtract the EEG
+landmark center, multiply by R, and add the image landmark center.
+
+220
+00:17:58.497 --> 00:18:00.670
+That gives the recovered EEG features.
+
+221
+00:18:01.650 --> 00:18:06.350
+The same operation applies to every query,
+including those that weren't selected as landmarks.
+
+222
+00:18:07.330 --> 00:18:12.030
+Now, back to the original question: which image did this person see?
+
+223
+00:18:13.210 --> 00:18:18.330
+SCORE recalculates CSLS in the recovered
+space, including the neighborhood averages.
+
+224
+00:18:18.890 --> 00:18:23.646
+The highest-scoring image becomes the retrieval result for each EEG query.
+
+225
+00:18:24.706 --> 00:18:26.166
+That completes the SCORE method.
+
+226
+00:18:26.886 --> 00:18:28.866
+So, how well does it work in practice?
+
+227
+00:18:29.846 --> 00:18:34.601
+Let's start with THINGS-EEG2, one of the best-known benchmarks in this field.
+
+228
+00:18:35.701 --> 00:18:43.241
+The strongest baseline, CSLS without coordinate recovery,
+reaches thirty-five point seven eight percent Top-1 accuracy.
+
+229
+00:18:44.241 --> 00:18:47.281
+SCORE reaches fifty-three point two three percent.
+
+230
+00:18:47.281 --> 00:18:51.161
+That's a gain of seventeen point four five percentage points.
+
+231
+00:18:52.101 --> 00:19:00.001
+And looking at the subjects individually, SCORE improves
+Top-1 accuracy over CSLS for all ten held-out subjects.
+
+232
+00:19:01.061 --> 00:19:08.121
+On another dataset, Alljoined-1.6M, SCORE also
+achieves the best results among the methods compared.
+
+233
+00:19:09.201 --> 00:19:14.361
+Top-1 accuracy rises from eight point nine
+three percent for the strongest baseline to
+
+234
+00:19:14.361 --> 00:19:19.381
+twelve point zero one percent, a gain of three point zero eight percentage points.
+
+235
+00:19:20.161 --> 00:19:23.282
+Let's look at one example from THINGS-EEG2.
+
+236
+00:19:23.862 --> 00:19:25.502
+A person saw a cruise ship.
+
+237
+00:19:26.362 --> 00:19:30.462
+With the standard SAMGA model, the correct image was ranked thirty-fourth.
+
+238
+00:19:30.942 --> 00:19:33.462
+SCORE moved it all the way up to third.
+
+239
+00:19:34.302 --> 00:19:39.722
+Together with the results across subjects and datasets,
+this gives a picture of consistent improvements.
+
+240
+00:19:40.782 --> 00:19:42.862
+Other experimental results are in the paper.
+
+241
+00:19:43.742 --> 00:19:48.942
+Here, let's look at just one more interesting experiment: transfer to new concepts.
+
+242
+00:19:50.082 --> 00:19:57.812
+So far, the full gallery has been used to estimate a recovery map,
+which then transforms the EEG features toward that gallery.
+
+243
+00:19:58.192 --> 00:19:59.612
+But what about a harder setting?
+
+244
+00:20:00.212 --> 00:20:03.832
+Suppose only half the gallery is available for estimating the map.
+
+245
+00:20:04.532 --> 00:20:07.552
+Can that same map still improve retrieval for the other half?
+
+246
+00:20:08.252 --> 00:20:12.432
+Back in the galaxy example, suppose only part of the constellation is visible.
+
+247
+00:20:13.392 --> 00:20:16.452
+Can a rotation fitted to that part also work for the rest?
+
+248
+00:20:17.372 --> 00:20:22.912
+To test this, the test concepts are split into two groups of one hundred: A and B.
+
+249
+00:20:23.872 --> 00:20:30.732
+Only group A supplies the information for estimating the
+statistics, selecting landmarks, and fitting the recovery map.
+
+250
+00:20:31.512 --> 00:20:36.252
+Those statistics and the map are then applied
+to group B, without fitting them again.
+
+251
+00:20:37.172 --> 00:20:40.372
+Retrieval is evaluated against B's one hundred images.
+
+252
+00:20:41.332 --> 00:20:42.212
+Here are the results.
+
+253
+00:20:43.192 --> 00:20:50.160
+The improvement remains: with CSLS ranking,
+Top-1 accuracy on group B rises from fifty point four
+
+254
+00:20:50.160 --> 00:20:56.512
+one percent without coordinate recovery to
+sixty-four point one six percent with the frozen map.
+
+255
+00:20:57.092 --> 00:21:03.812
+This suggests that the recovered coordinate relationship
+can generalize to new concepts, supporting the idea that
+
+256
+00:21:03.812 --> 00:21:09.912
+it captures a shared subject-to-image relationship
+rather than just fitting the concepts used to estimate it.
+
+257
+00:21:10.492 --> 00:21:19.248
+So, our diagnosis points to a difference in coordinate orientation as
+one reason cross-subject EEG-to-image retrieval performs poorly.
+
+258
+00:21:20.188 --> 00:21:24.148
+To address it, SCORE uses the image feature space as a shared reference.
+
+259
+00:21:24.928 --> 00:21:33.268
+Training prepares the encoder for recovery; at test time, the new
+subject's coordinates are corrected without labeled EEG–image pairs.
+
+260
+00:21:34.068 --> 00:21:35.828
+That's the idea behind our work.
+
+261
+00:21:36.448 --> 00:21:38.188
+Of course, there's still work to do.
+
+262
+00:21:38.908 --> 00:21:44.614
+The THINGS-EEG2 results rely on EEG
+responses averaged across repeated presentations.
+
+263
+00:21:45.634 --> 00:21:50.218
+Recovery also needs a batch of unlabeled EEG recordings from a new subject.
+
+264
+00:21:51.058 --> 00:21:54.898
+Next, we'd like to make this work with fewer and noisier responses.
+
+265
+00:21:55.818 --> 00:22:00.938
+And that brings us back to a simple question: before asking every new user for a
+
+266
+00:22:00.938 --> 00:22:07.199
+large labeled EEG dataset, can we make better use
+of the information already in their brain signals?

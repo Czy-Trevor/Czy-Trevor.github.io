@@ -164,6 +164,15 @@
     .paper-outlet { font-weight: 700; }
     .paper-summary { color: #484e51; }
     .paper-links a { margin-right: 14px; }
+    .score-video { grid-column: 1 / -1; margin: 0; min-width: 0; scroll-margin-top: 96px; }
+    .score-video video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid #d5d0ca; border-radius: 4px; }
+    .score-video figcaption { margin-top: 10px; line-height: 1.5; }
+    .score-video-title { font-weight: 700; }
+    .score-video-status { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 3px; background: var(--accent-soft); color: #78442f; }
+    .score-video-note { margin: 5px 0 0; }
+    .score-video-links { margin: 5px 0 0; }
+    .score-video-links a { margin-right: 14px; }
+    @media (max-width: 720px) { .score-video { order: 3; } }
     .pending { color: var(--muted); font-style: italic; }
 
     .project-list { margin: 0; padding-left: 19px; }
@@ -341,8 +350,21 @@
             <p class="authors"><strong>Zhenyao Cui</strong>, Siyuan Kan, Siyang Li, Ziwei Wang, Dongrui Wu</p>
             <p class="paper-outlet">Manuscript under review · arXiv:2608.19134</p>
             <p class="paper-summary">In EEG-to-image retrieval, we find that subjects preserve similar relationships among concepts but express them along systematically different coordinate directions. SCORE selects reliable EEG–image landmarks and estimates an orthogonal reorientation to recover an unseen subject’s coordinates without target labels or source EEG at deployment.</p>
-            <p class="paper-links"><a href="https://arxiv.org/abs/2608.19134">arXiv</a><a href="https://arxiv.org/pdf/2608.19134">PDF</a></p>
+            <p class="paper-links"><a href="https://arxiv.org/abs/2608.19134">arXiv</a><a href="https://arxiv.org/pdf/2608.19134">PDF</a><a href="#score-video">Video <span class="pending">(work in progress)</span></a></p>
           </div>
+          <figure class="score-video" id="score-video" aria-labelledby="score-video-title">
+            <video controls playsinline preload="none" poster="files/score/SCORE_v75_poster.jpg" aria-label="SCORE full research explainer video, version 75" aria-describedby="score-video-note">
+              <source src="files/score/SCORE_v75.mp4" type="video/mp4">
+              <track kind="captions" src="files/score/SCORE_v75_English.vtt" srclang="en" label="English">
+              Your browser does not support embedded video. <a href="files/score/SCORE_v75.mp4">Watch the full video</a>.
+            </video>
+            <figcaption>
+              <span class="score-video-title" id="score-video-title">SCORE · Full research explainer</span>
+              <span class="score-video-status">Work in progress</span>
+              <p class="score-video-note" id="score-video-note">Version 75 · 22 min · English narration and subtitles. This video is still being improved; the narration and animations are being refined.</p>
+              <p class="score-video-links"><a href="files/score/SCORE_v75.mp4">Open video</a><a href="files/score/SCORE_v75_English.vtt" download>English captions</a></p>
+            </figcaption>
+          </figure>
         </article>
 
         <article class="paper" id="paper-near">
