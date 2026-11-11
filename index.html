@@ -164,7 +164,7 @@
     .paper-outlet { font-weight: 700; }
     .paper-summary { color: #484e51; }
     .paper-links a { margin-right: 14px; }
-    .score-video { grid-column: 1 / -1; margin: 0; min-width: 0; scroll-margin-top: 96px; }
+    .score-video { grid-column: 1 / -1; width: min(100%, 520px); margin: 0 auto; min-width: 0; scroll-margin-top: 96px; }
     .score-video video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid #d5d0ca; border-radius: 4px; }
     .score-video figcaption { margin-top: 10px; line-height: 1.5; }
     .score-video-title { font-weight: 700; }
@@ -374,7 +374,7 @@
             <figcaption>
               <span class="score-video-title" id="score-video-title">SCORE · Full research explainer</span>
               <span class="score-video-status">Work in progress</span>
-              <p class="score-video-note" id="score-video-note">Version 75 · 22 min · English narration and subtitles. This video is still being improved; the narration and animations are being refined.</p>
+              <p class="score-video-note" id="score-video-note">Version 75 · 22 min · English narration and subtitles. This video is still being improved; the narration and animations are being refined. For smaller screens, use the player’s full-screen control.</p>
               <p class="score-video-links"><a href="files/score/SCORE_v75.mp4">Open video</a></p>
             </figcaption>
           </figure>
@@ -443,7 +443,7 @@
           <figure class="practice-card">
             <div class="experiment-gallery" aria-label="Two views of an ongoing EEG experiment">
               <div class="experiment-photo"><img src="images/eeg-experiment.jpg" alt="Participant viewing the stimulus display during an EEG experiment" loading="lazy"><span>EXPERIMENT</span></div>
-              <div class="experiment-photo"><img src="images/eeg-preparation.jpg" alt="Close view of the participant's EEG recording setup" loading="lazy"><span>RECORDING SETUP</span></div>
+              <div class="experiment-photo"><img src="images/eeg-preparation.jpg" alt="Close view of electrode placement on the participant’s head" loading="lazy"><span>ELECTRODE PLACEMENT</span></div>
             </div>
             <figcaption><strong>EEG experiment · ongoing</strong> Experimental setup for an ongoing EEG study, including stimulus presentation and neural data acquisition.</figcaption>
           </figure>
