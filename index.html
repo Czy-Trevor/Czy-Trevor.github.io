@@ -178,6 +178,12 @@
     .project-list { margin: 0; padding-left: 19px; }
     .project-list li { margin: 8px 0; padding-left: 3px; }
     .project-list strong { color: var(--ink); }
+    .practice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 20px; }
+    .practice-card { margin: 0; }
+    .practice-card img, .practice-card video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: #eef1f4; border-radius: 4px; }
+    .practice-card figcaption { margin-top: 9px; line-height: 1.5; }
+    .practice-card figcaption strong { display: block; color: var(--ink); }
+    @media (max-width: 720px) { .practice-grid { grid-template-columns: 1fr; } }
     footer { margin-top: 52px; padding-top: 17px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .8em; }
 
     @media (max-width: 940px) {
@@ -237,6 +243,7 @@
         <a href="#education">Education</a>
         <a href="#focus">Research</a>
         <a href="#research">Publications</a>
+        <a href="#practice">Practice</a>
         <a href="files/ZhenyaoCui_CV.pdf">CV</a>
       </nav>
     </div>
@@ -421,6 +428,21 @@
             <p class="paper-links"><a href="https://doi.org/10.1109/TAFFC.2026.3664341">Paper</a><a href="https://arxiv.org/abs/2504.09221">arXiv</a></p>
           </div>
         </article>
+      </section>
+
+      <section id="practice">
+        <h2 class="section-title">Experimental &amp; BCI Practice</h2>
+        <p>Alongside model development, I work with experimental paradigms, neural data acquisition, and practical brain–computer interface systems.</p>
+        <div class="practice-grid">
+          <figure class="practice-card">
+            <img src="images/eeg-experiment.jpg" alt="An ongoing EEG experiment showing a participant, stimulus display, and recording equipment" loading="lazy">
+            <figcaption><strong>EEG experiment · ongoing</strong> Experimental setup for an ongoing EEG study, including stimulus presentation and neural data acquisition.</figcaption>
+          </figure>
+          <figure class="practice-card">
+            <video controls preload="metadata" playsinline aria-label="Brain-controlled robotic arm demonstration"><source src="videos/robotic-arm-demonstration.mp4" type="video/mp4">Your browser does not support embedded video.</video>
+            <figcaption><strong>Brain-controlled robotic arm · 2025</strong> Competition demonstration of the SSVEP-based system, showing a robotic arm picking up a block and placing it in a container.</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section id="projects">
