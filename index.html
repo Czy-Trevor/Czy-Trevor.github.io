@@ -180,7 +180,13 @@
     .project-list strong { color: var(--ink); }
     .practice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 20px; }
     .practice-card { margin: 0; }
-    .practice-card img, .practice-card video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: #eef1f4; border-radius: 4px; }
+    .practice-card video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: #eef1f4; border-radius: 4px; }
+    .experiment-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 4px; background: #e8ecee; }
+    .experiment-photo { position: relative; min-width: 0; overflow: hidden; }
+    .experiment-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .experiment-photo:first-child img { object-position: center 55%; }
+    .experiment-photo:last-child img { object-position: center 47%; }
+    .experiment-photo span { position: absolute; left: 9px; bottom: 9px; padding: 3px 8px; color: #fff; background: rgba(20, 31, 36, .72); border-radius: 3px; font-size: .7em; letter-spacing: .03em; }
     .practice-card figcaption { margin-top: 9px; line-height: 1.5; }
     .practice-card figcaption strong { display: block; color: var(--ink); }
     @media (max-width: 720px) { .practice-grid { grid-template-columns: 1fr; } }
@@ -435,7 +441,10 @@
         <p>Alongside model development, I work with experimental paradigms, neural data acquisition, and practical brain–computer interface systems.</p>
         <div class="practice-grid">
           <figure class="practice-card">
-            <img src="images/eeg-experiment.jpg" alt="An ongoing EEG experiment showing a participant, stimulus display, and recording equipment" loading="lazy">
+            <div class="experiment-gallery" aria-label="Two views of an ongoing EEG experiment">
+              <div class="experiment-photo"><img src="images/eeg-experiment.jpg" alt="Participant viewing the stimulus display during an EEG experiment" loading="lazy"><span>EXPERIMENT</span></div>
+              <div class="experiment-photo"><img src="images/eeg-preparation.jpg" alt="Close view of the participant's EEG recording setup" loading="lazy"><span>RECORDING SETUP</span></div>
+            </div>
             <figcaption><strong>EEG experiment · ongoing</strong> Experimental setup for an ongoing EEG study, including stimulus presentation and neural data acquisition.</figcaption>
           </figure>
           <figure class="practice-card">
