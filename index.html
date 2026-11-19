@@ -143,11 +143,10 @@
       border: 1px solid #e4e0dc;
       box-shadow: 3px 3px 7px rgba(38, 45, 47, .16);
     }
-    .paper-text-tile { flex-direction: column; gap: 6px; color: #35515e; background: #eef3f3; }
-    .paper-text-tile strong { font-size: 2.2em; letter-spacing: .08em; }
-    .paper-text-tile > span:not(.paper-badge) { font-size: .9em; }
     .paper-media img { display: block; width: 100%; height: 225px; object-fit: contain; }
     .paper-media img.tall { height: 225px; }
+    .paper-media img.paper-diagram { padding: 43px 8px 8px; }
+    #paper-dplr, #paper-hsda { scroll-margin-top: 96px; }
     .paper-badge {
       position: absolute;
       z-index: 2;
@@ -406,12 +405,13 @@
         </article>
 
         <article class="paper" id="paper-dplr">
-          <div class="paper-media paper-text-tile"><span class="paper-badge">Under Review</span><strong>DPLR</strong><span>Cloud failure prediction</span></div>
+          <div class="paper-media"><span class="paper-badge">Under Review</span><img class="paper-diagram" src="images/papers/dplr-framework.png" alt="DPLR framework showing log preprocessing, embedding pretraining, and cloud failure prediction" loading="lazy"></div>
           <div class="paper-text">
             <h3 class="paper-title">DPLR: Domain-Pretrained Log Representations for Cloud Failure Prediction</h3>
             <p class="authors"><strong>Zhenyao Cui†</strong>, Siyuan Kan†, Lingfei Deng, Yunong Wang, Xuhua Ma, Xudong Zheng, Dongrui Wu</p>
             <p class="paper-outlet">Manuscript under review · Equal first author</p>
             <p class="paper-summary">DPLR uses a domain-specific tokenizer and masked language modeling to pretrain representations on 167 million logs, with time-aware attention and staged loss functions for cloud failure prediction.</p>
+            <p class="paper-links"><a href="images/papers/dplr-framework.png">Full-size figure</a></p>
           </div>
         </article>
 
@@ -427,12 +427,13 @@
         </article>
 
         <article class="paper" id="paper-hsda">
-          <div class="paper-media paper-text-tile"><span class="paper-badge">TPAMI · In Revision</span><strong>HSDA</strong><span>Cross-device EEG classification</span></div>
+          <div class="paper-media"><span class="paper-badge">TPAMI · In Revision</span><img class="paper-diagram" src="images/papers/hsda-framework.png" alt="HSDA framework showing cross-device channel alignment, discriminative prototype learning, and model inversion-based gradient regularization" loading="lazy"></div>
           <div class="paper-text">
             <h3 class="paper-title">Heterogeneous Supervised Domain Adaptation (HSDA) for Cross-Device EEG Classification</h3>
             <p class="authors"><strong>Zhenyao Cui</strong> · Second author</p>
             <p class="paper-outlet">IEEE Transactions on Pattern Analysis and Machine Intelligence · Revision in progress</p>
-            <p class="paper-summary">Research on supervised domain adaptation for cross-device EEG classification. My contribution focuses on theoretical derivations.</p>
+            <p class="paper-summary">HSDA uses labeled EEG from headsets with different electrode counts and layouts to calibrate a new headset with limited labeled data. Device-specific filters map recordings into a shared space, class prototypes keep different EEG responses separable, and gradient regularization stabilizes training on the target device. With about five minutes of calibration, cross-device transfer improved motor imagery and P300 decoding over within-device baselines. I derived a bound on target-device classification error that separates approximation, estimation from limited labels, and optimization.</p>
+            <p class="paper-links"><a href="images/papers/hsda-framework.png">Full-size figure</a></p>
           </div>
         </article>
 
